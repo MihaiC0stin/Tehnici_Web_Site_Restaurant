@@ -5,7 +5,12 @@
         <meta name="description" content="Site-ul unui restaurant care ofera meniuri pentru micul dejun, pranz si cina.">
         <meta name="keywords" content="restaurant, mancare, meniu, comenzi, mic-de-jun, pranz, cina, mesele zilei, desert, bauturi">
         <meta name="author" content="Belu Mihai">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="./resurse/ico/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="./resurse/ico/favicon.svg" />
+        <link rel="shortcut icon" href="./resurse/ico/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./resurse/ico/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="MyWebSite" />
+        <link rel="manifest" href="./resurse/ico/site.webmanifest" />
         <link rel="stylesheet" type="text/css" href="style.css">
         <title>Cel mai smecher restaurant</title>
     </head>
@@ -14,8 +19,45 @@
             <h1>Restaurant</h1>
         </header>
         <main>
+            <nav>
+                <ul>
+                    <li><a href ="index.html">Acasa</a>
+                        <ul>
+                            <li><a href="#despre-noi">Despre noi</a></li>
+                            <li><a href="#meniu">Meniu</a></li>
+                            <li><a href="#orar">Orar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <section id = "despre-noi">
+                <h2>Despre noi</h2>
+                <p>Restaurantul nostru ofera o gama variata de meniuri pentru micul dejun, pranz si cina. 
+                    Avem o echipa de bucatari talentati care pregatesc mancaruri delicioase si sanatoase. 
+                    Va asteptam cu drag sa ne vizitati!</p>
+                    <section>
+                        <h3>Istoria Noastră</h3> <!-- Nivel 3, fiind în interiorul <section> -->
+                        <p>Restaurantul a fost fondat în 1999...</p>
+                    </section>
+            </section>
+            <section id = "meniu">
+                <h2>Meniu</h2>
+                <p>Meniul nostru include:</p>
+                <ul>
+                    <li>mic dejun</li>
+                    <li>pranz</li>
+                    <li>cina</li>
+                    <li>desert</li>
+                    <li>bauturi</li>
+                </ul>
+            </section>
         </main>
         <footer>
+            <section id = "orar">
+                <h3>Orar</h3>
+                <p>Luni - Vineri: 8:00 - 22:00</p>
+                <p>Sambata - Duminica: 9:00 - 23:00</p>
+            </section>
         </footer>
     </body>
 </html>
