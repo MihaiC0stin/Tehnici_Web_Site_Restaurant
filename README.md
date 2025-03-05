@@ -1,5 +1,8 @@
 # Tehnici_Web_Site_Restaurant
 
+## Etapa 1:
+Cerinte
+
 ## site-uri folosite:
 - https://imageresizer.com/ ----------> resize la imagini
 - https://realfavicongenerator.net/ --> favicon generator
