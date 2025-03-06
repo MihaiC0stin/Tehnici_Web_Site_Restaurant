@@ -1,5 +1,59 @@
 # Tehnici_Web_Site_Restaurant
 
+## Etapa 1:
+Cerinte:
+- Cerinta 1
+  - Creare folder
+  - Creare fisier index.html
+  - doctype  1
+  - setare limba  2
+- Cerinta 2
+  - Titlu  linia 16
+  - 4 taguri meta  5-8
+- Cerinta 3
+  - Creare folder resurse
+  - Creare favicon
+  - Adaugare favicon in html  9-14
+- Cerinta 4
+  - Impartire body in header, main, footer  20, 23, 175
+- Cerinta 5
+  - Folorise tag section si folosire heading corect  41-73  
+- Cerinta 6
+  - Navigare  24-40
+- Cerinta 7
+  - folosirea tagurilor p, ul
+- Cerinta 8
+  - adaugarea unei imagini cu descriere  61-68
+- Cerinta 9
+  - textul sa contina toate cuvinte cheie
+- Cerinta 10
+  - tag b  44
+  - tag strong  157
+  - tag s si ins  150
+  - tag abbr  124
+- Cerinta 11
+  - link extern  99, 102, 104, 108
+  - link footer catre inceputul paginii  189
+  - 2 linkuri in iframe catre video  111-119
+  - link tip download  124-125, 127-128
+- Cerinta 12
+  - details+summary (faq) 159-173
+- Cerinta 13
+  - address 176-186
+- Cerinta 14
+  - copyright si datetime  187
+- Cerinta 15
+  - validare HTML https://validator.w3.org/
+- Bonus:
+  - Cerinta 16
+    - Adaugare formula matematica 48-59
+  - Cerinta 17
+    - Afisare pdf folosind object  126-129
+  - Cerinta 18
+    - Creare imagine interactive mapand o imagine  77-91
+  - Cerinta 19
+    - Adaugare adresa facultatii sub forma de iframe  180-183
+
 ## site-uri folosite:
 - https://imageresizer.com/ ----------> resize la imagini
 - https://realfavicongenerator.net/ --> favicon generator
