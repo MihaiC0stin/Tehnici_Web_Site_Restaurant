@@ -8,7 +8,7 @@ Cerinte:
   - doctype  1
   - setare limba  2
 - Cerinta 2
-  - Titlu  linia 16
+  - Titlu 16
   - 4 taguri meta  5-8
 - Cerinta 3
   - Creare folder resurse
