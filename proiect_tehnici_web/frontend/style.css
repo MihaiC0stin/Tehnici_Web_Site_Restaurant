@@ -1,0 +1,68 @@
+:root{
+
+--theme-main-color: #C7A228
+--theme-main-color-dark: #61583A
+--theme-main-color-light: #FABE00
+
+--background-color: var(--theme-main-color-dark)
+--container-color: var(--theme-main-color)
+
+--button-color: var(--theme-main-color-light)
+--button-hover-color: var(--theme-main-color)
+--button-text-color: #333129
+
+--text-color: #333129
+--border-color: #FFFFFF
+--shadow-color: rgba(0, 0, 0, 0.1);
+
+--link-color: #FA120A
+--link-hover-color: #613F3E
+}
+
+#grid-pagina-acasa {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: "welcome welcome welcome welcome welcome welcome"
+                         "tabel tabel tabel diverse diverse diverse"
+                         "utilizatori-online utilizatori-statistici diverse diverse diverse diverse"
+                         "anunturi anunturi calendar-evenimente calendar-evenimente date-site-server date-site-server";
+}
+
+#grid-pagina-acasa > * {
+    outline: 1px solid #000;
+}
+
+#welcome{
+    grid-area: welcome;
+}
+
+#tabel{
+    grid-area: tabel;
+}
+
+#calendar-evenimente{
+    grid-area: calendar-evenimente;
+}
+
+#anunturi{
+    grid-area: anunturi;
+}
+
+#utilizatori-online{
+    grid-area: utilizatori-online;
+}
+
+#utilizatori-statistici{
+    grid-area: utilizatori-statistici;
+}
+
+#date-site-server{
+    grid-area: date-site-server;
+}
+
+#diverse{
+    grid-area: diverse;
+}
+
+
+
