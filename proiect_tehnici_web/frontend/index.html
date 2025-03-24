@@ -12,6 +12,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="./resurse/ico/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="MyWebSite" />
     <link rel="manifest" href="./resurse/ico/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/326eec0334.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Cel mai smecher restaurant</title>
 </head>
@@ -111,13 +115,17 @@
                             cozonac pufos</a>
                     </section>
                     <section id="video">
-                        <h3>Videoclipuri Recomandate</h3>
-                        <a href="https://www.youtube.com/embed/3AAdKl1UYZs" target="iframe_video">Rețeta paste carbonara</a>
-                        <a href="https://www.youtube.com/embed/MDX8fylSisU?si=eOt0lfQ1bIp24o_m" target="iframe_video">Rețeta
-                            pizza de casa</a>
-                        <br>
-                        <iframe name="iframe_video" width="560" height="315" src="https://www.youtube.com/embed/3AAdKl1UYZs"
-                            allowfullscreen></iframe>
+                        <h3>Videoclipuri Recomandate <i class="fa-brands fa-youtube fa-bounce"></i></h3>
+                        <div class="container-iframe">
+                            <div class="taburi-iframe">
+                                <a href="https://www.youtube.com/embed/3AAdKl1UYZs" target="iframe_video">Rețeta paste carbonara</a>
+                                <a href="https://www.youtube.com/embed/MDX8fylSisU?si=eOt0lfQ1bIp24o_m" target="iframe_video">Rețeta
+                                    pizza de casa</a>
+                            </div>
+                            <br>
+                            <iframe name="iframe_video" width="560" height="315" src="https://www.youtube.com/embed/3AAdKl1UYZs"
+                                allowfullscreen></iframe>
+                        </div>
                     </section>
                 </section>
                 <section id="meniu">
@@ -175,7 +183,180 @@
                 </section>
             </section>
             <section id = "tabel">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo ipsam veritatis ea molestias accusantium, eveniet perferendis ratione voluptas vitae excepturi nihil rem necessitatibus beatae corporis, fuga adipisci omnis nam delectus?</p>
+                <div id = tabel-orar>
+                    <table>
+                        <caption>Orarul de functionare al restaurantului si mesele zilei in functie de intervalul orar</caption>
+                        <thead>
+                            <tr>
+                                <th>Oră / Zi</th> <!-- Celula goală pentru aliniere -->
+                                <th>Luni</th>
+                                <th>Marti</th>
+                                <th>Miercuri</th>
+                                <th>Joi</th>
+                                <th>Vineri</th>
+                                <th>Sambata</th>
+                                <th>Duminica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>08:00 - 09:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                            </tr>
+                            <tr>
+                                <th>09:00 - 10:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>10:00 - 11:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>11:00 - 12:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>12:00 - 13:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>13:00 - 14:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>14:00 - 15:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>15:00 - 16:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>16:00 - 17:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>17:00 - 18:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>18:00 - 19:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>19:00 - 20:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>20:00 - 21:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>21:00 - 22:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>22:00 - 23:00</th>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">Restaurantul este inchis in zilele de sarbatoare legala.</td>
+                            </tr>
+                        </tfoot>
+                    </div>
+                </table>
             </section>
             <section id = "calendar-evenimente">
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente consectetur et ipsum. Voluptatum, alias ex tempora iste ad consequatur ducimus neque quisquam maxime maiores velit eos voluptas vero deleniti porro.</p>
@@ -199,19 +380,21 @@
     </main>
     <footer>
         <address>
-            <p>Telefon: <a href="tel:+40123456789">+40 123 456 789</a></p>
-            <p>Adresă: <a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica+Bucuresti"
+            <p><i class="fa-solid fa-phone" id = "iconita-footer"></i>Telefon: <a href="tel:+40123456789">+40 123 456 789</a></p>
+            <p><i class="fa-solid fa-location-dot" id = "iconita-footer"></i> Adresă: <a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica+Bucuresti"
                     target="_blank">Strada Principală nr. 10, București</a></p>
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.8843011393146!2d26.097011776218338!3d44.43553547107579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff472f47f047%3A0x493984726f0235f9!2sFacultatea%20de%20Matematic%C4%83%20%C8%99i%20Informatic%C4%83!5e0!3m2!1sro!2sro!4v1741195149427!5m2!1sro!2sro"
                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <p>Email: <a href="mailto:contact@restaurantulmeusmecher.ro">contact@restaurantulmeusmecher.ro</a></p>
-            <p>Chat pe <a href="https://wa.me/40123456789" target="_blank">WhatsApp</a></p>
+            <p><i class="fa-solid fa-envelope" id = "iconita-footer"></i> Email: <a href="mailto:contact@restaurantulmeusmecher.ro">contact@restaurantulmeusmecher.ro</a></p>
+            <p>Chat pe  <i class="fa-brands fa-whatsapp" id = "iconita-footer"></i> <a href="https://wa.me/40123456789" target="_blank">WhatsApp</a></p>
         </address>
         <small>&copy; <time datetime="2025-03-02">2025</time> Restaurant. Toate drepturile rezervate.</small>
         <br>
-        <a href="#">Link top</a>
+        <a href="#" title="duce la inceputul paginii" class="button-container">
+            &#5123; 
+        </a>
     </footer>
 </body>
 

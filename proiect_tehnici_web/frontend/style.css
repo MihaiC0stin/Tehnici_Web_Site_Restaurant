@@ -1,31 +1,77 @@
 :root{
+
 --theme-main-color: #C7A228;
 --theme-main-color-dark: #61583A;
+--theme-main-color-darker: #333129;
 --theme-main-color-light: #FABE00;
+--theme-main-color-lighter: #FFFFFF;
 
 --background-color: var(--theme-main-color-dark);
 --container-color: var(--theme-main-color);
 
 --button-color: var(--theme-main-color-light);
 --button-hover-color: var(--theme-main-color);
---button-text-color: #333129;
+--button-text-color: var(--theme-main-color-darker);
 
 /* --text-color: #333129; */
---text-color: #FFFFFF;
---border-color: #FFFFFF;
+--text-color: var(--theme-main-color-lighter);
+--border-color: var(--theme-main-color-lighter);
 --shadow-color: rgba(0, 0, 0, 0.1);
 
 --link-color: #FA120A;
 --link-hover-color: #613F3E;
 
---spatiere-stanga-dreapta-pagina-ecran-mare: 1em;
---spatiere-stanga-dreapta-pagina-ecran-mediu: 0.5em;
---spatiere-stanga-dreapta-pagina-ecran-mic: 0.1em;
+--spatiere-stanga-dreapta-pagina-ecran-mare: 100px;
+--spatiere-stanga-dreapta-pagina-ecran-mediu: 50px;
+--spatiere-stanga-dreapta-pagina-ecran-mic: 10px;
 }
 
-html{
-    font-size: 16px;
+ /* start resetare css */
+/* html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+} */
+/* HTML5 display-role reset for older browsers */
+/* article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
 }
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+} */
+
+/* sfarsit resetare css */
 
 
 body{
@@ -33,14 +79,27 @@ body{
     color: var(--text-color);
     border: 0px solid var(--border-color);
     box-shadow: 0 0 10px var(--shadow-color);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 header{
     text-align: center;
+    background-color: var(--theme-main-color);
+    border-radius: 25px;
+    font-family: 'Winky Sans', sans-serif;
+    font-weight: 660;
+    font-style: italic;
 }
 
 main{
     text-align: left;
+    background-color: var(--theme-main-color-dark);
+}
+
+footer{
+    text-align: left;
+    background-color: var(--theme-main-color-darker);
 }
 
 #grid-pagina-acasa{
@@ -66,6 +125,13 @@ main{
     #grid-pagina-acasa{
         gap: 2em;
     }
+
+    #grid-pagina-acasa > * {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+
 }
 
 @media (min-width: 1101px) and (max-width: 1400px)  {
@@ -75,8 +141,26 @@ main{
         font-size: 1.1rem;
     }
 
+    /* * {
+        animation: none !important;
+        transition: none !important;
+    } */
+
+    #tabel-orar{
+        overflow-x: auto;
+    }
+
     #grid-pagina-acasa {
         gap: 1em;
+    }
+
+    #grid-pagina-acasa > * {
+        padding-left: 0.8em;
+        padding-right: 0.8em;
+    }
+
+    .element {
+        animation: none;
     }
 }
 
@@ -85,15 +169,33 @@ main{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
         font-size: 1rem;
+        animation: none;
+    }
+
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    #tabel-orar{
+        overflow-x: auto;
     }
 
     
     #grid-pagina-acasa{
         display: block;
+        margin-block-start: 0;
+        margin-block-end: 0;
     }
 
+    /* #grid-pagina-acasa p {
+        margin-block-start: 0;
+        margin-block-end: 0;
+    } */
+
     #grid-pagina-acasa > * {
-        margin-bottom: -1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
     }
 }   
 
@@ -106,36 +208,211 @@ main{
 
 #despre-noi{
     grid-area: welcome;
+    background-color: var(--theme-main-color);
 }
 
 #tabel{
     grid-area: tabel;
+    background-color: var(--theme-main-color-dark);
 }
 
 #calendar-evenimente{
     grid-area: calendar-evenimente;
+    background-color: var(--theme-main-color-darker);
+    border-radius: 25px;
 }
 
 #anunturi{
     grid-area: anunturi;
+    background-color: var(--theme-main-color-light);
+    border-radius: 50px;
 }
 
 #utilizatori-online{
     grid-area: utilizatori-online;
+    background-color: var(--theme-main-color);
 }
 
 #utilizatori-statistici{
     grid-area: utilizatori-statistici;
+    background-color: var(--theme-main-color-dark);
+    border-radius: 25px;
 }
 
 #date-site-server{
     grid-area: date-site-server;
+    background-color: var(--theme-main-color-light);
 }
 
 #diverse{
     grid-area: diverse;
+    background-color: var(--theme-main-color-darker);
+    border-radius: 10px;
 }
 
+#iconita-footer{
+    margin-left:0.2em;
+    margin-right:0.2em;
+}
+
+.fa-whatsapp {
+    background-color: rgb(10, 234, 10);
+    border-radius: 50%;
+}
+
+.fa-youtube {
+    color: rgb(255, 0, 0);
+    background-color: #FFFFFF;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    line-height: 1.6em;
+    margin-left: 0.2em;
+}
+
+/* Stil general pentru tabel */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px; /* spațiu pentru caption sub tabel */
+}
+
+/* Stil pentru celule */
+th, td {
+    padding: 8px;
+    border-right: 1px solid #ccc; /* culoare implicită pentru borduri */
+    border-bottom: 1px solid #ccc; /* borduri între rânduri */
+    border-top: 1px solid #ccc; /* borduri între rânduri */
+    border-left: 1px solid #ccc; /* borduri între coloane */
+}
+
+/* Borduri alternante */
+th:nth-child(odd), td:nth-child(odd) {
+    border-right-color: var(--theme-main-color-lighter); /* c2 */
+}
+
+th:nth-child(even), td:nth-child(even) {
+    border-right-color: var(--theme-main-color-light); /* c1 */
+}
+
+/* Borduri mai groase între secțiuni */
+thead th {
+    border-bottom-width: 3px; /* între thead și tbody */
+}
+
+/* tbody tr:last-child {
+    border-bottom-width: 3px;
+} */
+
+tfoot td {
+    border-top-width: 3px; /* între tbody și tfoot */
+}
+
+/* Captiune sub tabel */
+caption {
+    caption-side: bottom;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Hover efect */
+tr {
+    transition: box-shadow 0.5s;
+}
+
+tr:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.taburi-iframe {
+    width: 40%;
+    display: block;
+    justify-content: center;
+}
+
+.taburi-iframe > a {
+    text-decoration: none;
+    color: var(--theme-main-color-dark);
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    height: 40px;
+    border: 4px double var(--theme-main-color-dark);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-main-color-light);
+    text-align: right;
+    padding-right: 0.3em;
+    transition: background-color 1s, width 1s;
+}
+
+.container-iframe {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 60%;
+    max-width: 1000px;
+    min-width: 200px;
+    overflow: hidden;
+}
+
+.taburi-iframe > a:hover {
+    background-color: var(--theme-main-color-lighter);
+    width: 120px;
+}
+
+.button-container {
+    text-decoration: none;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display:block;
+    width: 2em;
+    height: 2em;
+    background-color: var(--theme-main-color-light);
+    border: 2px solid var(--theme-main-color-darker);
+    border-radius: 50%; /* Transformă div-ul în cerc */
+    text-align: center; /* Alinierea textului în centru */
+    line-height: 2em; /* Înălțimea textului */
+    opacity: 0.6; /* Opacitatea */
+    color: var(--theme-main-color-darker);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    transition: opacity 0.5s, background-color 0.5s, box-shadow 0.5s;
+}
+
+.button-container:hover {
+    opacity: 1;
+    background-color: var(--theme-main-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+math {
+    font-family: 'Times New Roman', Times, serif; /* Font general pentru tot MathML-ul */
+}
+
+mi {
+    color: blue; /* Variabilele în albastru */
+    font-style: italic; /* Italic pentru variabile */
+}
+
+mn {
+    color: red; /* Numerele în roșu */
+}
+
+mo {
+    color: green; /* Operatorii în verde */
+}
+
+mfrac {
+    color: purple; /* Fracțiile în violet */
+}
+
+msup {
+    color: orange; /* Superscript în portocaliu */
+}
 
 
 
