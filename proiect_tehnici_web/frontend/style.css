@@ -1,23 +1,47 @@
-/* :root{
+:root{
+--theme-main-color: #C7A228;
+--theme-main-color-dark: #61583A;
+--theme-main-color-light: #FABE00;
 
---theme-main-color: #C7A228
---theme-main-color-dark: #61583A
---theme-main-color-light: #FABE00
+--background-color: var(--theme-main-color-dark);
+--container-color: var(--theme-main-color);
 
---background-color: var(--theme-main-color-dark)
---container-color: var(--theme-main-color)
+--button-color: var(--theme-main-color-light);
+--button-hover-color: var(--theme-main-color);
+--button-text-color: #333129;
 
---button-color: var(--theme-main-color-light)
---button-hover-color: var(--theme-main-color)
---button-text-color: #333129
-
---text-color: #333129
---border-color: #FFFFFF
+/* --text-color: #333129; */
+--text-color: #FFFFFF;
+--border-color: #FFFFFF;
 --shadow-color: rgba(0, 0, 0, 0.1);
 
---link-color: #FA120A
---link-hover-color: #613F3E
-} */
+--link-color: #FA120A;
+--link-hover-color: #613F3E;
+
+--spatiere-stanga-dreapta-pagina-ecran-mare: 1em;
+--spatiere-stanga-dreapta-pagina-ecran-mediu: 0.5em;
+--spatiere-stanga-dreapta-pagina-ecran-mic: 0.1em;
+}
+
+html{
+    font-size: 16px;
+}
+
+
+body{
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 0px solid var(--border-color);
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+
+header{
+    text-align: center;
+}
+
+main{
+    text-align: left;
+}
 
 #grid-pagina-acasa{
     display: grid;
@@ -32,7 +56,55 @@
     outline: 1px solid #000;
 }
 
-#welcome{
+@media (min-width: 1401px){
+    body{
+        padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
+        padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
+        font-size: 1.2rem;
+    }   
+
+    #grid-pagina-acasa{
+        gap: 2em;
+    }
+}
+
+@media (min-width: 1101px) and (max-width: 1400px)  {
+    body{
+        padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
+        padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
+        font-size: 1.1rem;
+    }
+
+    #grid-pagina-acasa {
+        gap: 1em;
+    }
+}
+
+@media (max-width: 1100px){
+    body{
+        padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
+        padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
+        font-size: 1rem;
+    }
+
+    
+    #grid-pagina-acasa{
+        display: block;
+    }
+
+    #grid-pagina-acasa > * {
+        margin-bottom: -1em;
+    }
+}   
+
+#grid-pagina-acasa img
+{   
+    min-width: 100px;
+    max-width: 2000px;
+    width: 100%;
+}
+
+#despre-noi{
     grid-area: welcome;
 }
 
@@ -63,6 +135,8 @@
 #diverse{
     grid-area: diverse;
 }
+
+
 
 
 
