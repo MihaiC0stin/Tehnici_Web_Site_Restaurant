@@ -26,8 +26,8 @@
 --spatiere-stanga-dreapta-pagina-ecran-mic: 10px;
 }
 
- /* start resetare css */
-/* html, body, div, span, applet, object, iframe,
+ /* Reset CSS bazat pe stilurile implicite ale Chrome */
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -40,38 +40,43 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-} */
-/* HTML5 display-role reset for older browsers */
-/* article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-} */
 
-/* sfarsit resetare css */
+
+
+body {
+    line-height: 1.4;  /* Chrome folosește o înălțime a liniei aproximativă */
+    margin: 1em;  /* Chrome aplică o margine implicită pentru <body> */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 10px 0;  /* Adaugă o margine jos pentru a simula stilul implicit al Chrome */
+    font-weight: bold;  /* Titlurile sunt bold în Chrome */
+}
+
+p {
+    margin: 10px 0 10px 0;  /* Adaugă o margine jos */
+}
+
+ol, ul {
+    list-style: disc outside none; /* Stilul listei implicite în Chrome */
+    margin: 0 0 10px 20px; /* Adaugă margine pentru listă */
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+blockquote {
+    margin: 16px;  /* Chrome folosește o margine pentru blockquote */
+}
 
 
 body{
@@ -157,10 +162,6 @@ footer{
     #grid-pagina-acasa > * {
         padding-left: 0.8em;
         padding-right: 0.8em;
-    }
-
-    .element {
-        animation: none;
     }
 }
 
@@ -335,6 +336,8 @@ tr:hover {
 }
 
 .taburi-iframe > a {
+    max-width: 100%;
+    font-size: 0.8em;
     text-decoration: none;
     color: var(--theme-main-color-dark);
     display: flex;
@@ -413,7 +416,5 @@ mfrac {
 msup {
     color: orange; /* Superscript în portocaliu */
 }
-
-
 
 
