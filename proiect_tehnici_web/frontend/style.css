@@ -24,6 +24,7 @@
 --spatiere-stanga-dreapta-pagina-ecran-mare: 100px;
 --spatiere-stanga-dreapta-pagina-ecran-mediu: 50px;
 --spatiere-stanga-dreapta-pagina-ecran-mic: 10px;
+
 }
 
  /* Reset CSS bazat pe stilurile implicite ale Chrome */
@@ -124,7 +125,7 @@ footer{
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
-        font-size: 1.2rem;
+        font-size: 1rem;
     }   
 
     #grid-pagina-acasa{
@@ -143,7 +144,7 @@ footer{
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
-        font-size: 1.1rem;
+        font-size: 0.9rem;
     }
 
     /* * {
@@ -162,6 +163,8 @@ footer{
     #grid-pagina-acasa > * {
         padding-left: 0.8em;
         padding-right: 0.8em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
     }
 }
 
@@ -169,7 +172,7 @@ footer{
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
-        font-size: 1rem;
+        font-size: 0.8rem;
         animation: none;
     }
 
@@ -210,45 +213,54 @@ footer{
 #despre-noi{
     grid-area: welcome;
     background-color: var(--theme-main-color);
+    padding: 1em;
 }
 
 #tabel{
     grid-area: tabel;
     background-color: var(--theme-main-color-dark);
+    padding: 1em;
 }
 
 #calendar-evenimente{
     grid-area: calendar-evenimente;
     background-color: var(--theme-main-color-darker);
     border-radius: 25px;
+    padding: 1em;
 }
 
 #anunturi{
     grid-area: anunturi;
     background-color: var(--theme-main-color-light);
     border-radius: 50px;
+    padding: 1em;
 }
 
 #utilizatori-online{
     grid-area: utilizatori-online;
     background-color: var(--theme-main-color);
+    padding: 1em;
 }
 
 #utilizatori-statistici{
     grid-area: utilizatori-statistici;
     background-color: var(--theme-main-color-dark);
     border-radius: 25px;
+    padding: 1em;
+
 }
 
 #date-site-server{
     grid-area: date-site-server;
     background-color: var(--theme-main-color-light);
+    padding: 1em;
 }
 
 #diverse{
     grid-area: diverse;
     background-color: var(--theme-main-color-darker);
     border-radius: 10px;
+    padding: 1em;
 }
 
 #iconita-footer{
@@ -394,6 +406,8 @@ tr:hover {
 
 math {
     font-family: 'Times New Roman', Times, serif; /* Font general pentru tot MathML-ul */
+    overflow: hidden; /* Ascunde overflow-ul */
+
 }
 
 mi {
