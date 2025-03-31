@@ -44,7 +44,7 @@ Cerinte:
   - copyright si datetime  187
 - Cerinta 15
   - validare HTML https://validator.w3.org/
-- Bonus:
+- ### Bonus:
   - Cerinta 16
     - Adaugare formula matematica 48-59
   - Cerinta 17
