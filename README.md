@@ -1,6 +1,6 @@
 # Tehnici_Web_Site_Restaurant
 
-## Etapa 1:
+## ETAPA 1:
 Cerinte:
 - Cerinta 1
   - Creare folder
@@ -53,6 +53,25 @@ Cerinte:
     - Creare imagine interactive mapand o imagine  77-91
   - Cerinta 19
     - Adaugare adresa facultatii sub forma de iframe  180-183
+
+  ## ETAPA 2
+    - Task schema cromatica: culorile se gasesc in root
+    - Task layout: linia 111
+    - Task design rudimentar:
+      - a, b, e:  124
+      - c:  92
+      - d:  213
+    - Task iconuri și font extern:
+      -  icon:  html 18, 382, 183 css 266
+      -  font: html 17, css 96
+    - Task tabel: html 186, css 289
+    - Task stilizare taburi: html 117, css 344
+    - Task link top: html 395, css 382
+    - # Bonus:
+      -  Resetare css: La inceput fisier css
+      -  Stilizare formula mathML:  css 407
+  
+  
 
 ## site-uri folosite:
 - https://imageresizer.com/ ----------> resize la imagini
