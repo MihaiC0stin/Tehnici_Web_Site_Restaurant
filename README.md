@@ -54,7 +54,7 @@ Cerinte:
   - Cerinta 19
     - Adaugare adresa facultatii sub forma de iframe  180-183
 
-  ## ETAPA 2
+  ### ETAPA 2
     - Task schema cromatica: culorile se gasesc in root
     - Task layout: linia 111
     - Task design rudimentar:
