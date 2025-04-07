@@ -5,8 +5,8 @@
 /* Containerul pentru icon-ul hamburger */
 #hamburger {
     display: inline-block;
-    width: 25px;    /* ajustează după necesitate */
-    height: 20px;   /* ajustează după necesitate */
+    width: 25px;  
+    height: 20px;   
     cursor: pointer;
     position: relative;
     top: 10%;
@@ -26,7 +26,7 @@
     left: 0;
     width: 100%;
     height: 4px;  /* înălțimea dreptunghiurilor */
-    background-color: var(--theme-main-color-lighter); /* poți schimba culoarea după preferințe */
+    background-color: var(--theme-main-color-lighter);
     border-radius: 2px;
   }
   
@@ -92,7 +92,7 @@ ul.meniu-navigare a, ul.meniu-navigare div {
     transition: none !important;
 }
 
-/* Definim animația pentru fiecare bară */
+/* Animația pentru fiecare bară */
 @keyframes hamburgerAnim {
     0% {
       background-color: var(--theme-main-color-lighter);
