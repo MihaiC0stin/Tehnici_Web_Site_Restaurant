@@ -70,7 +70,24 @@ Cerinte:
   - ### Bonus:
     -  Resetare css: La inceput fisier css
     -  Stilizare formula mathML:  css 407
-  
+
+
+## ETAPA 3
+  - Task tabel:
+    - Ecran mare: 
+      - animatie: nav.css 38 background, 60 text-shadow
+      - deschidere submeniu:  17, 55 tranzitia
+      - subliniere text submeniu: 83
+    - Ecran mediu:
+      - afisare doar iconita: html 66, nav-mediu.css
+    - Ecran mic:
+      - creare burger: html 66, nav-mic.css
+      - animatie meniu: nav-mic.css  55
+  - Task print-css: style.css 453
+- ### Bonus:
+  - task creare icon hamburger folosind span: html: 38, nav-mic.css 6-44
+  - task animatie hamburger: nav-mic.css 96
+  - task animatie delay pentru fiecare span: nav-mic.css 119  
   
 
 ## site-uri folosite:
