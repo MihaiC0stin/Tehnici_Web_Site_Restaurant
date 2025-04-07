@@ -1,0 +1,125 @@
+$color_1: var(--theme-main-color-dark);
+$background-color_1: var(--theme-main-color-light);
+$background-color_2: var(--theme-main-color);
+
+/* Ajustăm pseudo-elementul pentru subliniere */
+#hamburger {
+	display: none;
+}
+#ch-meniu {
+	display: none;
+}
+nav {
+	--inaltime-meniu: 30px;
+	--latime-buton-meniu: 120px;
+	background-color: $background-color_1;
+	height: var(--inaltime-meniu);
+}
+ul.meniu-navigare {
+	li {
+		div.text-icon {
+			display: inline-block;
+			cursor: pointer;
+		}
+		div.image-icon {
+			display: inline-block;
+			cursor: pointer;
+		}
+		position: relative;
+		width: 100%;
+		background-color: $background-color_1;
+		height: var(--inaltime-meniu);
+		border: 1px solid var(--theme-main-color-dark);
+		box-sizing: border-box;
+		text-align: center;
+		font-weight: bold;
+		transition: background-color 0.5s linear;
+		&:hover {
+			background-color: $background-color_2;
+			cursor: pointer;
+			ul {
+				max-height: 1000px;
+				transition-timing-function: ease-out;
+			}
+			.text-icon {
+				text-shadow: 0px 0px;
+			}
+			.image-icon {
+				text-shadow: 0px 0px;
+			}
+		}
+		ul {
+			li {
+				a {
+					display: inline-block;
+					position: relative;
+					&::after {
+						content: '';
+						position: absolute;
+						bottom: 6px;
+						left: 0;
+						width: 100%;
+						height: 1px;
+						background: var(--theme-main-color-dark);
+						opacity: 0;
+						transition: opacity 0.3s ease-in-out;
+					}
+				}
+				&:hover {
+					a {
+						&::after {
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	ul {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.5s ease-in-out;
+		list-style-type: none;
+		position: relative;
+		left: -1px;
+		background-color: $background-color_1;
+		padding: 0;
+		margin: 0;
+	}
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	padding: 0;
+	margin: 0;
+	a {
+		position: relative;
+		display: inline-block;
+		text-decoration: none;
+		color: $color_1;
+		display: block;
+		height: 100%;
+		line-height: var(--inaltime-meniu);
+		overflow: hidden;
+		text-shadow: 0px -30px;
+		transition: text-shadow 0.5s linear;
+	}
+	div {
+		position: relative;
+		display: inline-block;
+		text-decoration: none;
+		color: $color_1;
+		display: block;
+		height: 100%;
+		line-height: var(--inaltime-meniu);
+		overflow: hidden;
+		text-shadow: 0px -30px;
+		transition: text-shadow 0.5s linear;
+	}
+	>li {
+		&:hover {
+			>a {
+				text-shadow: 0px 0px;
+			}
+		}
+	}
+}
