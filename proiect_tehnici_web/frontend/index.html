@@ -17,6 +17,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/326eec0334.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="nav.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 1100px)" href="nav-mediu.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 800px)" href="nav-mic.css">
+
+
     <title>Cel mai smecher restaurant</title>
 </head>
 
@@ -26,11 +31,16 @@
     </header>
     <main>
         <nav>
-            <ul>
-                <li><a href="index.html">Acasa</a>
-                    <ul>
+            <label id="hamburger" for="ch-meniu">
+                <img src="./resurse/imagini/hamburger_icon_2.png" alt="Meniu hamburger",>
+            </label>
+            <input type="checkbox" id="ch-meniu">
+            <ul class = "meniu-navigare">
+                <li><div class="image-icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="text-icon" id="acasa">Acasa</div>                 
+                    <!-- <ul>
                         <li><a href="#despre-noi">Despre noi</a></li>
-                        <li><a href="#retete-simple">Retete simple pe care le poti face si acasa</a></li>
+                        <li><a href="#retete-simple">Retete</a></li>
                         <li>
                             <ul>
                                 <li><a href="#video">Videoclipuri</a></li>
@@ -39,9 +49,18 @@
                         <li><a href="#meniu">Meniu</a></li>
                         <li><a href="#orar">Orar</a></li>
                         <li><a href="#intrebari-frecvente">Intrebari frecvente</a></li>
+                    </ul> -->
+                </li>
+                <li><a href="rezervari.html">Rezervari</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="meniu.html">Meniu</a>
+                    <ul>
+                        <li><a href="#meniu-mancare">Mancare</a></li>
+                        <li><a href="#meniu-bauturi">Bauturi</a></li>
                     </ul>
                 </li>
             </ul>
+
         </nav>
 
         <div id = "grid-pagina-acasa">

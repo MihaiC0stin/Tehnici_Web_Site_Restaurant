@@ -1,0 +1,54 @@
+#hamburger{
+    display: block;
+}
+
+ul.meniu-navigare{
+    display: none;
+}
+
+#hamburger>img{
+    height: var(--inaltime-meniu);
+    display: block;
+}
+
+#ch-meniu:checked+ul.meniu-navigare{
+    display: block;
+    z-index: 10;
+    animation: menuExpand 1s linear forwards;
+}
+
+@keyframes menuExpand {
+    0% {
+        letter-spacing: -15px;
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        letter-spacing: normal;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#ch-meniu:checked + ul.meniu-navigare li {
+    animation: itemAppear 1s linear forwards;
+} 
+
+@keyframes itemAppear {
+    0% {
+        letter-spacing: -10px;
+        transform: scaleX(0.9);
+        opacity: 0;
+    }
+    100% {
+        letter-spacing: normal;
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+ul.meniu-navigare a, ul.meniu-navigare div {
+    transition: none !important;
+}
+
+

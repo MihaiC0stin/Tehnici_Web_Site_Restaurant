@@ -115,13 +115,16 @@ footer{
                          "tabel tabel tabel tabel diverse diverse diverse diverse"
                          "utilizatori-online utilizatori-online utilizatori-statistici utilizatori-statistici diverse diverse diverse diverse"
                          "anunturi anunturi anunturi calendar-evenimente calendar-evenimente calendar-evenimente date-site-server date-site-server";
+
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #grid-pagina-acasa > * {
     outline: 1px solid #000;
 }
 
-@media (min-width: 1401px){
+@media (min-width: 1101px){
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mare);
@@ -137,10 +140,17 @@ footer{
         padding-right: 1em;
     }
 
+    #grid-pagina-acasa img
+    {   
+    min-width: 500px;
+    max-width: 2000px;
+    width: 100%;
+    }
+
 
 }
 
-@media (min-width: 1101px) and (max-width: 1400px)  {
+@media (min-width: 801px) and (max-width: 1100px)  {
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mediu);
@@ -166,9 +176,15 @@ footer{
         padding-top: 0.5em;
         padding-bottom: 0.5em;
     }
+
+    #grid-pagina-acasa img {   
+    min-width: 500px;
+    max-width: 700px;
+    width: 100%;
+    }
 }
 
-@media (max-width: 1100px){
+@media (max-width: 800px){
     body{
         padding-left: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
         padding-right: var(--spatiere-stanga-dreapta-pagina-ecran-mic);
@@ -176,10 +192,10 @@ footer{
         animation: none;
     }
 
-    * {
+    /* * {
         animation: none !important;
         transition: none !important;
-    }
+    } */
 
     #tabel-orar{
         overflow-x: auto;
@@ -201,14 +217,16 @@ footer{
         padding-left: 0.5em;
         padding-right: 0.5em;
     }
+
+    #grid-pagina-acasa img
+    {   
+    min-width: 200px;
+    max-width: 700px;
+    width: 100%;
+    }
 }   
 
-#grid-pagina-acasa img
-{   
-    min-width: 100px;
-    max-width: 2000px;
-    width: 100%;
-}
+
 
 #despre-noi{
     grid-area: welcome;
@@ -430,5 +448,8 @@ mfrac {
 msup {
     color: orange; /* Superscript în portocaliu */
 }
+
+
+
 
 

@@ -1,0 +1,11 @@
+ul.meniu-navigare li div.image-icon{
+    display: block;
+}
+
+ul.meniu-navigare li div.text-icon{
+    display: none;
+}
+
+ul.meniu-navigare {
+    font-size: 0.9em;
+}
