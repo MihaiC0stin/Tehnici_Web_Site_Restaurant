@@ -27,12 +27,19 @@
 
 <body>
     <header>
-        <h1>Restaurantul cel mai smecher</h1>
+        <div class="title-container">
+            <h1>Restaurantul cel mai smecher</h1>
+        </div>
     </header>
     <main>
         <nav>
             <label id="hamburger" for="ch-meniu">
-                <img src="./resurse/imagini/hamburger_icon_2.png" alt="Meniu hamburger",>
+                <!-- <img src="./resurse/imagini/hamburger_icon_2.png" alt="Meniu hamburger",> -->
+                <div class="hamburger-container">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                  </div>
             </label>
             <input type="checkbox" id="ch-meniu">
             <ul class = "meniu-navigare">
@@ -398,6 +405,7 @@
         </div>   
     </main>
     <footer>
+        <p id="banner">Acesta este un proiect scolar!</p>
         <address>
             <p><i class="fa-solid fa-phone" id = "iconita-footer"></i>Telefon: <a href="tel:+40123456789">+40 123 456 789</a></p>
             <p><i class="fa-solid fa-location-dot" id = "iconita-footer"></i> Adresă: <a href="https://www.google.com/maps?q=Facultatea+de+Matematica+si+Informatica+Bucuresti"
@@ -415,6 +423,7 @@
             &#5123; 
         </a>
     </footer>
+    <div id="watermark"></div>
 </body>
 
 </html>
