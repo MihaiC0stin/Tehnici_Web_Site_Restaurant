@@ -60,14 +60,14 @@ ul.meniu-navigare{
 
 @keyframes menuExpand {
     0% {
-        letter-spacing: -15px;
+        /* letter-spacing: -15px; */
         opacity: 0;
-        transform: translateX(-20px);
+        /* transform: translateX(-20px); */
     }
     100% {
-        letter-spacing: normal;
+        /* letter-spacing: normal; */
         opacity: 1;
-        transform: translateX(0);
+        /* transform: translateX(0); */
     }
 }
 
@@ -78,12 +78,12 @@ ul.meniu-navigare{
 @keyframes itemAppear {
     0% {
         letter-spacing: -10px;
-        transform: scaleX(0.9);
+        /* transform: scaleX(0.9); */
         opacity: 0;
     }
     100% {
         letter-spacing: normal;
-        transform: scaleX(1);
+        /* transform: scaleX(1); */
         opacity: 1;
     }
 }
