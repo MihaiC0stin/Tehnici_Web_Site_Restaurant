@@ -79,7 +79,7 @@ ul.meniu-navigare li ul li a {
     position: relative;
 }
 
-/* Ajustăm pseudo-elementul pentru subliniere */
+
 ul.meniu-navigare li ul li a::after {
     content: '';
     position: absolute;
