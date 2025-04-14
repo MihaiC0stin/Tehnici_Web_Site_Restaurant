@@ -586,7 +586,7 @@ color: var(--link-hover-color); /* sau orice altă culoare de accent */
 position: relative;
 display: inline-block;
 color: var(--link-color); 
-background-image: radial-gradient(circle, var(--culoare-pata) 0%, var(--culoare-pata) 40%, transparent 80%, transparent 100%);
+background-image: radial-gradient(ellipse, var(--culoare-pata) 0%, var(--culoare-pata) 40%, transparent 80%, transparent 100%);
 background-position: center;
 background-repeat: no-repeat;
 background-size: 0% 0%;
