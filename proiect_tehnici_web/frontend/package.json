@@ -1,0 +1,37 @@
+{
+  "name": "proiect_tehnici_web",
+  "version": "1.0.0",
+  "description": "Restaurantul Cel Mai Smecher",
+  "keywords": [
+    "restaurant",
+    "mancare",
+    "meniu",
+    "mic",
+    "dejun",
+    "pranz",
+    "cina",
+    "meniul",
+    "zilei",
+    "deset",
+    "bauturi"
+  ],
+  "homepage": "https://github.com/MihaiC0stin/Tehnici_Web_Site_Restaurant#readme",
+  "bugs": {
+    "url": "https://github.com/MihaiC0stin/Tehnici_Web_Site_Restaurant/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MihaiC0stin/Tehnici_Web_Site_Restaurant.git"
+  },
+  "license": "ISC",
+  "author": "Belu Mihai",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}

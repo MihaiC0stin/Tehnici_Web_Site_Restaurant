@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    
+    <meta name="description" content="Site-ul unui restaurant care ofera meniuri pentru micul dejun, pranz si cina.">
+    <meta name="keywords" content="restaurant, mancare, meniu, mic dejun, pranz, cina, meniul zilei, desert, bauturi">
+    <title>Cel mai smecher restaurant</title>
+
+    <%- include("../fragmente/head.ejs") %>
+</head>
+
+<body>
+    <%- include("../fragmente/header.ejs") %>
+    <main>
+        <%- include("../fragmente/nav.ejs") %>
+        <div id = "grid-pagina-acasa">
+            <section id="despre-noi">
+                <h2>Despre noi</h2>
+                <p>Restaurantul nostru ofera o gama variata de meniuri pentru <b>micul dejun</b>, <b>pranz</b>, <b>cina</b>
+                    si mai ales <b>meniul zilei</b>, care este <b>diferit pentru fiecare zi a saptamanii</b>.
+                    Avem o echipa de bucatari <b>talentati</b> care pregatesc <b>mancaruri delicioase si sanatoase</b>.
+                    Va asteptam cu drag sa ne vizitati!</p>
+                <p><strong>Motto-ul nostru: </strong>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mfrac>
+                            <mrow>
+                                <mi>Mâncare bună</mi>
+                                <mo>x</mo>
+                                <mi>Atmosferă plăcută</mi>
+                            </mrow>
+                            <mi>Durata așteptării mâncării</mi>
+                        </mfrac>
+                        <mo>=</mo>
+                        <mi>Satisfacția clientului</mi>
+                    </math>
+                </p>
+                <figure>
+                    <picture>
+                        <source srcset="/resurse/imagini/restaurant-small.jpg" media="(max-width: 1100px)">
+                        <source srcset="/resurse/imagini/restaurant-medium.jpg" media="(max-width: 1400px)">
+                        <img src="/resurse/imagini/restaurant-large.jpg" alt="Interiorul elegant al restaurantului">
+                    </picture>
+                    <figcaption>Interior elegant și atmosferă plăcută la Restaurantul Meu.</figcaption>
+                </figure>
+                <section>
+                    <h3>Istoria Noastră</h3>
+                    <p>Restaurantul a fost fondat în 1999...</p>
+                </section>
+                <section id="imagine-interactiva">
+                    <h2>Aceasta este o imagine interactiva</h2>
+                    <p>Click pe elementele din imagine pentru a afla mai multe detalii despre ofertele la pizza.</p>
+                    <img src="/resurse/imagini/pizza_image.jpg" usemap="#pizzaimagemap" alt="imagine interactiva pizza">
+                    <map name="pizzaimagemap">
+                        <area shape="circle" coords="633,451,157"
+                            href="https://tazz.ro/bucuresti/pizza-bucuresti/21413/restaurant#subcategory-2367838-product-31323580"
+                            target="_blank" alt="Pizza Parma de la Pizzat" title="Pizza Parma">
+                        <area shape="circle" coords="346,223,147"
+                            href="https://tazz.ro/bucuresti/pizza-bucuresti/21413/restaurant#subcategory-2367838-product-31323579"
+                            target="_blank" alt="Pizza Tonno e cipole de la Pizzat" title="Pizza Tonno e cipole">
+                        <area shape="circle" coords="639,228,41"
+                            href="https://tazz.ro/bucuresti/pizza-bucuresti/21413/restaurant#subcategory-2367839-product-31323582"
+                            target="_blank" alt="Sos dulce de la Pizzat" title="Sos dulce">
+                        <area shape="circle" coords="328,448,40"
+                            href="https://tazz.ro/bucuresti/pizza-bucuresti/21413/restaurant#subcategory-2367839-product-31323582"
+                            target="_blank" alt="Sos dulce de la Pizzat" title="Sos dulce">
+                    </map>
+                </section>
+                <section id="retete-simple">
+                    <h2>Retete simple pe care le poti face si acasa</h2>
+                    <p>Iti prezentam cateva retete simple pe care le poti face si acasa.
+                        Retetele sunt prezentate sub forma de link-uri catre pagini web si videoclipuri de pe youtube.</p>
+                    <section id="pagini-web">
+                        <h3>Pagini Web Recomandate</h3>
+                        <a href="https://www.jamieoliver.com/recipes/pasta-recipes/quick-carbonara/" target="_blank">Rețeta
+                            paste carbonara</a>
+                        <br>
+                        <a href="https://www.jamieoliver.com/recipes/bread-recipes/basic-pizza/" target="-blank">Rețeta pizza de
+                            casa</a>
+                        <br>
+                        <a href="https://www.jamieoliver.com/recipes/fruit-recipes/quick-apple-pie/" target="_blank">Rețeta
+                            tarta cu mere</a>
+                        <br>
+                        <a href=" https://savoriurbane.com/cozonac-pufos-reteta-simpla-cu-rahat-si-nuca/" target="_blank">Rețeta
+                            cozonac pufos</a>
+                    </section>
+                    <section id="video">
+                        <h3>Videoclipuri Recomandate <i class="fa-brands fa-youtube fa-bounce"></i></h3>
+                        <div class="container-iframe">
+                            <div class="taburi-iframe">
+                                <a href="https://www.youtube.com/embed/3AAdKl1UYZs" target="iframe_video">Rețeta paste carbonara</a>
+                                <a href="https://www.youtube.com/embed/MDX8fylSisU?si=eOt0lfQ1bIp24o_m" target="iframe_video">Rețeta
+                                    pizza de casa</a>
+                            </div>
+                            <br>
+                            <iframe name="iframe_video" width="560" height="315" src="https://www.youtube.com/embed/3AAdKl1UYZs"
+                                allowfullscreen></iframe>
+                        </div>
+                    </section>
+                </section>
+                <section id="meniu">
+                    <h2>Meniu</h2>
+                    <p><strong>Puteti descarca meniul nostru complet in format
+                            <abbr title="Portable Document File">PDF</abbr>: <a href="/resurse/downloadable/meniu.pdf"
+                                download="meniu.pdf">meniu</a></strong></p>
+                    <object data="/resurse/downloadable/meniu.pdf" type="application/pdf" width="1000" height="600">
+                        <p>Meniul nu poate fi afisat. Il puteti descarca de <a href="/resurse/downloadable/meniu.pdf"
+                                download="meniu.pdf">aici</a>.</p>
+                    </object>
+                    <p>Meniul nostru include:</p>
+                    <ul>
+                        <li>meniul zilei</li>
+                        <li>
+                            <ul>
+                                <li>luni</li>
+                                <li>marti</li>
+                                <li>miercuri</li>
+                                <li>joi</li>
+                                <li>vineri</li>
+                                <li>sambata</li>
+                                <li>duminica</li>
+                            </ul>
+                        </li>
+                        <li>mancare</li>
+                        <li>desert</li>
+                        <li>bauturi</li>
+                    </ul>
+                    <p><strong>Atentie !</strong>
+                        <br>
+                        Meniul zilei in zilele de weekend beneficiaza de o reducere de <s>15%</s> <ins>30%</ins>.
+                    </p>
+                </section>
+                <section id="orar">
+                    <h2>Orar</h2>
+                    <p>Luni - Vineri: 8:00 - 22:00</p>
+                    <p>Sambata - Duminica: 9:00 - 23:00</p>
+                    <p><strong>Atentie ! In zilele de weekend restaurantul nu face livrari la domiciliu ! </strong></p>
+                </section>
+                <section id="intrebari-frecvente">
+                    <h2>Întrebări Frecvente</h2>
+                    <details>
+                        <summary>Care sunt orele de funcționare ale restaurantului?</summary>
+                        <p>Restaurantul nostru este deschis zilnic între orele 09:00 - 23:00.</p>
+                    </details>
+                    <details>
+                        <summary>Oferiți servicii de livrare?</summary>
+                        <p>Da, oferim livrare în București și în zonele limitrofe. Puteți comanda online din meniul nostru.</p>
+                    </details>
+                    <details>
+                        <summary>Pot face o rezervare online?</summary>
+                        <p>Sigur! Puteți face o rezervare accesând secțiunea Rezervări.</p>
+                    </details>
+                </section>
+            </section>
+            <section id = "tabel">
+                <div id = tabel-orar>
+                    <table>
+                        <caption>Orarul de functionare al restaurantului si mesele zilei in functie de intervalul orar</caption>
+                        <thead>
+                            <tr>
+                                <th>Oră / Zi</th> <!-- Celula goală pentru aliniere -->
+                                <th>Luni</th>
+                                <th>Marti</th>
+                                <th>Miercuri</th>
+                                <th>Joi</th>
+                                <th>Vineri</th>
+                                <th>Sambata</th>
+                                <th>Duminica</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>08:00 - 09:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                            </tr>
+                            <tr>
+                                <th>09:00 - 10:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>10:00 - 11:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>11:00 - 12:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>12:00 - 13:00</th>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                                <td>Mic Dejun</td>
+                            </tr>
+                            <tr>
+                                <th>13:00 - 14:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>14:00 - 15:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>15:00 - 16:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>16:00 - 17:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>17:00 - 18:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>18:00 - 19:00</th>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                                <td>Pranz</td>
+                            </tr>
+                            <tr>
+                                <th>19:00 - 20:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>20:00 - 21:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>21:00 - 22:00</th>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                            <tr>
+                                <th>22:00 - 23:00</th>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Inchis</td>
+                                <td>Cina</td>
+                                <td>Cina</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="8">Restaurantul este inchis in zilele de sarbatoare legala.</td>
+                            </tr>
+                        </tfoot>
+                    </div>
+                </table>
+            </section>
+            <section id = "calendar-evenimente">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente consectetur et ipsum. Voluptatum, alias ex tempora iste ad consequatur ducimus neque quisquam maxime maiores velit eos voluptas vero deleniti porro.</p>
+            </section>
+            <section id = "anunturi">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sint deleniti inventore, labore impedit obcaecati magni velit possimus eum animi eveniet dignissimos expedita nostrum dolorum, alias ipsum totam nulla. Facere?</p>
+            </section>
+            <section id = "utilizatori-online">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quod suscipit sit maiores autem officia cum provident optio commodi quisquam, aspernatur cupiditate est odit tempora ut ullam accusantium dignissimos dolore.</p>
+                <p><b>Ip: </b><%- locals.ip %></p>
+            </section>
+            <section id = "utilizatori-statistici">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus non quas unde dignissimos voluptatibus quaerat corporis illum quae tenetur dicta, cum repellendus odit aut quisquam in magni accusamus temporibus corrupti.</p>
+            </section>
+            <section id = "date-site-server">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga numquam reiciendis impedit itaque doloremque, autem saepe repellat nostrum inventore ratione neque, quis dolorum ullam dolorem cumque minima veniam laboriosam provident.</p>
+            </section>
+            <section id = "diverse">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate cum iste nulla debitis soluta ipsum eaque dolore itaque, aut perspiciatis corrupti provident asperiores voluptatem quidem tempora quia molestias libero eos.</p>
+            </section>
+        </div>   
+    </main>
+    <%- include("../fragmente/footer.ejs") %>
+
+    <div id="watermark"></div>
+</body>
+
+</html>
