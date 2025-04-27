@@ -1,0 +1,110 @@
+{
+	"cale_galerie":"resurse/imagini/galerie",
+	"imagini": [
+		{
+			"fisier_imagine": "briose-frisca.png",
+			"nume_poza": "Brioșe cu frișcă",
+			"continut_alternativ": "Brioșe cu cremă de frișcă și topping crocant",
+			"descriere_poza": "Desert delicios cu brioșe pufoase decorate cu frișcă și fulgi crocanți.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "cartofi-prajiti.png",
+			"nume_poza": "Cartofi prăjiți",
+			"continut_alternativ": "Bol cu cartofi prăjiți crocanți",
+			"descriere_poza": "Porție generoasă de cartofi prăjiți aurii și crocanți.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "clatite.png",
+			"nume_poza": "Clătite",
+			"continut_alternativ": "Clătite rulate presărate cu zahăr pudră",
+			"descriere_poza": "Două clătite fine servite cu felii de portocală și zahăr pudră.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "clatite-americane.png",
+			"nume_poza": "Clătite americane",
+			"continut_alternativ": "Clătite americane cu caramel și fructe",
+			"descriere_poza": "Turn de clătite americane cu sirop de caramel, nuci și căpșuni.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "gogosi.png",
+			"nume_poza": "Gogoși colorate",
+			"continut_alternativ": "Gogoși cu glazură colorată și bombonele",
+			"descriere_poza": "Mix de gogoși decorate cu glazură și decoruri colorate.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "hamburger.png",
+			"nume_poza": "Hamburger cu cartofi wedges",
+			"continut_alternativ": "Hamburger cu frunze de salată și cartofi wedges",
+			"descriere_poza": "Burger suculent cu brânză, salată și cartofi la cuptor.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "sandwich-crispy.png",
+			"nume_poza": "Sandwich crispy",
+			"continut_alternativ": "Sandwich cu carne crispy și salată",
+			"descriere_poza": "Sandwich apetisant cu pui crispy, sos și salată verde.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "paste.png",
+			"nume_poza": "Paste cu legume",
+			"continut_alternativ": "Farfurie cu spaghete și legume proaspete",
+			"descriere_poza": "Paste cu legume colorate și frunze de busuioc pentru un gust mediteranean.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "prajitura-ciocolata.png",
+			"nume_poza": "Prăjitură cu ciocolată",
+			"continut_alternativ": "Felie de tort de ciocolată cu cremă",
+			"descriere_poza": "Prăjitură bogată în ciocolată și cremă de vanilie, perfectă pentru desert.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "sandwich.png",
+			"nume_poza": "Sandwich lung cu legume",
+			"continut_alternativ": "Sandwich pe baghetă cu legume și verdeață",
+			"descriere_poza": "Sandwich generos cu ardei, roșii și ierburi aromate, servit cu lămâie.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		},
+		{
+			"fisier_imagine": "supa-creveti.png",
+			"nume_poza": "Supă cu creveți",
+			"continut_alternativ": "Supă asiatică cu creveți, ouă de prepeliță și ardei iute",
+			"descriere_poza": "Supă aromată cu tăiței, creveți, ouă de prepeliță, ardei iute și frunze proaspete de mentă.",
+			"intervale_zile": [["luni", "duminica"], ["sambata", "sambata"]]
+		  },
+		  {
+			"fisier_imagine": "supa-misterioasa.png",
+			"nume_poza": "Supă asiatică",
+			"continut_alternativ": "Supă asiatică cu tăiței, carne și frunze verzi",
+			"descriere_poza": "Supă bogată cu carne, tăiței de orez, ierburi aromate și sos picant.",
+			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+		  },
+		  {
+			"fisier_imagine": "tarta-afine.png",
+			"nume_poza": "Tartă cu afine",
+			"continut_alternativ": "Tartă cu cremă și topping de afine proaspete",
+			"descriere_poza": "Desert răcoritor cu blat crocant, cremă fină și un strat generos de afine.",
+			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+		  },
+		  {
+			"fisier_imagine": "tort-scortisoara.png",
+			"nume_poza": "Tort cu scorțișoară",
+			"continut_alternativ": "Tort cu cremă albă și bețișoare de scorțișoară",
+			"descriere_poza": "Tort aromat cu scorțișoară, glazură fină și decor elegant.",
+			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+		  },
+		  {
+			"fisier_imagine": "tort-trandafiri.png",
+			"nume_poza": "Tort decorat cu trandafiri",
+			"continut_alternativ": "Tort alb decorat cu trandafiri și flori din marțipan",
+			"descriere_poza": "Tort festiv cu decor floral din marțipan, ideal pentru ocazii speciale.",
+			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+		  }		
+	]
+}

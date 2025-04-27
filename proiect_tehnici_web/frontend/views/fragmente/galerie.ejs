@@ -1,0 +1,51 @@
+<h2>Galerie Statica</h2>
+    <div id="grid-galerie">
+
+        <% 
+            function ziInInterval(zi, interval) {
+                let [zi_start, zi_end] = interval;
+                let idx_start = vect_zile.indexOf(zi_start);
+                let idx_end   = vect_zile.indexOf(zi_end);
+                let idx_zi    = vect_zile.indexOf(zi);
+
+                if (idx_start <= idx_end) {
+                    return idx_zi >= idx_start && idx_zi <= idx_end;
+                } else {
+                    // interval care trece peste duminică (ex: ["vineri", "marti"])
+                    return idx_zi >= idx_start || idx_zi <= idx_end;
+                }
+            }
+            
+            function imaginiValidePeZi(imagini, ziua_curenta) {
+                return imagini.filter(imag => 
+                    imag.intervale_zile && imag.intervale_zile.some(interval => ziInInterval(ziua_curenta, interval))
+                );
+            } %>
+            
+            <%
+                d = new Date();
+                vect_zile=["luni", "marti", "miercuri", "joi", "vineri", "sambata", "duminica"];
+                ziua_curenta = vect_zile[d.getDay()];
+                imaginiValide = imaginiValidePeZi(locals.imagini, ziua_curenta);
+                let numarImaginiValide = imaginiValide.length;
+                if(numarImaginiValide % 2 == 1){
+                    numarImaginiValide -= 1;
+                } %>
+            <%
+                for (let i = 0; i < numarImaginiValide; i++) {
+                    let imag = imaginiValide[i]; 
+                    let g = Math.floor(i / 8); %>
+                    <figure style="--g: <%= g %>;"> 
+                        <picture>
+                            <source srcset="<%= imag.fisier_imagine_mic %>" media="screen and (max-width: 800px)">
+                            <source srcset="<%= imag.fisier_imagine_mediu %>" media="screen and (max-width: 1100px)">
+                            <img src="<%= imag.fisier_imagine %>"
+                                alt="<%= imag.continut_alternativ || imag.nume_poza %>" 
+                                title="<%= imag.descriere_poza %>">
+                        </picture>
+                        <figcaption>
+                            <%= imag.nume_poza %>
+                        </figcaption>
+                    </figure> 
+                <% } %>          
+    </div>

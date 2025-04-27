@@ -37,8 +37,8 @@
                 </p>
                 <figure>
                     <picture>
-                        <source srcset="/resurse/imagini/restaurant-small.jpg" media="(max-width: 1100px)">
-                        <source srcset="/resurse/imagini/restaurant-medium.jpg" media="(max-width: 1400px)">
+                        <source srcset="/resurse/imagini/restaurant-small.jpg" media="screen and (max-width: 1100px)">
+                        <source srcset="/resurse/imagini/restaurant-medium.jpg" media="screen and (max-width: 1400px)">
                         <img src="/resurse/imagini/restaurant-large.jpg" alt="Interiorul elegant al restaurantului">
                     </picture>
                     <figcaption>Interior elegant și atmosferă plăcută la Restaurantul Meu.</figcaption>
@@ -47,6 +47,7 @@
                     <h3>Istoria Noastră</h3>
                     <p>Restaurantul a fost fondat în 1999...</p>
                 </section>
+                
                 <section id="imagine-interactiva">
                     <h2>Aceasta este o imagine interactiva</h2>
                     <p>Click pe elementele din imagine pentru a afla mai multe detalii despre ofertele la pizza.</p>
@@ -179,6 +180,7 @@
                     </details>
                 </section>
             </section>
+            
             <section id = "tabel">
                 <div id = tabel-orar>
                     <table>
@@ -374,7 +376,11 @@
             <section id = "diverse">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate cum iste nulla debitis soluta ipsum eaque dolore itaque, aut perspiciatis corrupti provident asperiores voluptatem quidem tempora quia molestias libero eos.</p>
             </section>
-        </div>   
+        </div>
+        <section id="galerie-statica">
+            <%- include("../fragmente/galerie.ejs") %>
+        </section>
+           
     </main>
     <%- include("../fragmente/footer.ejs") %>
 
