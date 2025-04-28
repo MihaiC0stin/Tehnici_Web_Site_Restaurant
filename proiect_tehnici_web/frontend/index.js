@@ -83,7 +83,7 @@ function compileazaScss(caleScss, caleCss){
         "sourceMap": true,
         "quietDeps": true});
     fs.writeFileSync(caleCss,rez.css);
-    fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap));
+    // fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap));
 
     
 }

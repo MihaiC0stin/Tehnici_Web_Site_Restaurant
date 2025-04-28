@@ -740,3 +740,68 @@ figcaption::before {
     margin-right: 0.3em;
 }
 
+.efect-css-stilizare-hr {
+    position: relative;
+    width: 50%;
+    margin: 2rem auto;
+  }
+  
+  .efect-css-stilizare-hr hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(var(--theme-main-color-light));
+  }
+  
+  .efect-css-stilizare-hr::before,
+  .efect-css-stilizare-hr::after {
+    content: "*";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-43%);
+    font-size: 1.5rem;
+    color: var(--theme-main-color-light);
+  }
+  
+  .efect-css-stilizare-hr::before {
+    left: -1rem;
+  }
+  
+  .efect-css-stilizare-hr::after {
+    right: -1rem;
+  }
+  
+  #container-text {
+    position: relative;
+    width: fit-content;
+    margin: 100px auto;
+  }
+  
+  #text {
+    position: relative;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    color: var(--theme-main-color-light)
+  }
+  
+  #text-reflectat {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform-origin: 0 0;
+    transform: rotateX(180deg) skewX(-45deg) scaleY(0.5) translate(10px, -25px);
+    opacity: 0.55;
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    color: var(--theme-main-color-light);
+    filter: blur(2px);
+    transition: transform 1s linear, filter 1s linear;
+  }
+  
+  /* La hover pe text, modificăm reflexia */
+  #container-text:hover #text-reflectat {
+    transform: rotateX(180deg) skewX(-45deg) scaleY(0.7) translate(10px, -35px);
+    filter: blur(3px);
+  }
+  
