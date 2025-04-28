@@ -97,14 +97,14 @@
 			"nume_poza": "Tort cu scorțișoară",
 			"continut_alternativ": "Tort cu cremă albă și bețișoare de scorțișoară",
 			"descriere_poza": "Tort aromat cu scorțișoară, glazură fină și decor elegant.",
-			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+			"intervale_zile": [["sambata", "sambata"], ["vineri", "duminica"]]
 		  },
 		  {
 			"fisier_imagine": "tort-trandafiri.png",
 			"nume_poza": "Tort decorat cu trandafiri",
 			"continut_alternativ": "Tort alb decorat cu trandafiri și flori din marțipan",
 			"descriere_poza": "Tort festiv cu decor floral din marțipan, ideal pentru ocazii speciale.",
-			"intervale_zile": [["sambata", "sambata"], ["luni", "duminica"]]
+			"intervale_zile": [["sambata", "sambata"], ["vineri", "duminica"]]
 		  }		
 	]
 }
