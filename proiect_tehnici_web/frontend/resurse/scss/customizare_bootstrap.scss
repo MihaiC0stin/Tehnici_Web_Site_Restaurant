@@ -3,6 +3,7 @@
     $primary: #a7e639,
     $secondary: #67b75c,
     $body-color: #333333,
+    $font-family-sans-serif: ('Playwrite RO', sans-serif),
     $grid-breakpoints: (
       xs: 0,
       sm: 576px,
@@ -14,8 +15,9 @@
     $border-radius: 1rem,
     $border-radius-lg: 1.5rem,
     $border-radius-sm: 0.75rem,
-    $h1-font-size: 3rem,
-    $h2-font-size: 2.5rem,
+    $h1-font-size: 4rem,
+    $h2-font-size: 3rem,
     $h3-font-size: 2rem,
-    $font-family-sans-serif: ("Poppins", sans-serif)
+    $link-color: #67b75c,
+    $link-hover-color: #a7e639
 );
