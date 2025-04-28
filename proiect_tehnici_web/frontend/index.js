@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
+const sass = require('sass');
 
 app = express();
 
@@ -16,6 +17,8 @@ console.log("process.cwd():", process.cwd());
 
 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
+app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
+
 
 app.get("/favicon.ico", function(req, res, next){
     res.sendFile(path.join(__dirname, "resurse/ico/favicon.ico"));
@@ -35,7 +38,10 @@ app.get("/galerie-statica", function(req, res, next){
 
 obGlobal = {
     obErori: null,
-    obImagini: null
+    obImagini: null,
+    folderScss: path.join(__dirname, "resurse/scss"),
+    folderCss: path.join(__dirname, "resurse/css"),
+    folderBackup: path.join(__dirname, "resurse/backup")
 }
 
 vect_foldere = ["temp", "backup", "temp1"]
@@ -44,6 +50,62 @@ for(let folder of vect_foldere){
         fs.mkdirSync(path.join(__dirname, folder));
     }
 }
+
+
+
+function compileazaScss(caleScss, caleCss){
+    // console.log("cale:",caleCss);
+    if(!caleCss){
+
+        let numeFisExt=path.basename(caleScss);
+        let numeFis=numeFisExt.split(".")[0]   /// "a.scss"  -> ["a","scss"]
+        caleCss=numeFis+".css";
+    }
+    
+    if (!path.isAbsolute(caleScss))
+        caleScss=path.join(obGlobal.folderScss,caleScss )
+    if (!path.isAbsolute(caleCss))
+        caleCss=path.join(obGlobal.folderCss,caleCss )
+    
+
+    let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
+    if (!fs.existsSync(caleBackup)) {
+        fs.mkdirSync(caleBackup,{recursive:true})
+    }
+    
+    // la acest punct avem cai absolute in caleScss si  caleCss
+
+    let numeFisCss=path.basename(caleCss, ".css")+ "_" + (new Date()).getTime() + ".css";
+    if (fs.existsSync(caleCss)){
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",numeFisCss ));
+    }
+    rez=sass.compile(caleScss, {
+        "sourceMap": true,
+        "quietDeps": true});
+    fs.writeFileSync(caleCss,rez.css);
+    fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap));
+
+    
+}
+
+vFisiere=fs.readdirSync(obGlobal.folderScss);
+for( let numeFis of vFisiere ){
+    if (path.extname(numeFis)==".scss"){
+        compileazaScss(numeFis);
+    }
+}
+
+
+fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
+    console.log(eveniment, numeFis);
+    if (eveniment=="change" || eveniment=="rename"){
+        let caleCompleta=path.join(obGlobal.folderScss, numeFis);
+        if (fs.existsSync(caleCompleta)){
+            compileazaScss(caleCompleta);
+        }
+    }
+})
+
 
 
 
@@ -91,7 +153,7 @@ function initImagini(){
         imag.fisier_imagine_mic=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, "mic",numeFis+".webp" ));
         imag.fisier_imagine=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier_imagine ));     
     }
-    console.log(obGlobal.obImagini)
+    // console.log(obGlobal.obImagini)
 }
 initImagini();
 

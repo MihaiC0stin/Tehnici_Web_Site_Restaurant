@@ -1,101 +1,113 @@
-#hamburger, #ch-meniu {
-    display: none;
+@charset "UTF-8";
+/* Ajustăm pseudo-elementul pentru subliniere */
+#hamburger {
+  display: none;
+}
+
+#ch-meniu {
+  display: none;
 }
 
 nav {
-    --inaltime-meniu: 30px;
-    --latime-buton-meniu: 120px;
-    background-color: var(--theme-main-color-light);
-    height: var(--inaltime-meniu);
+  --inaltime-meniu: 30px;
+  --latime-buton-meniu: 120px;
+  background-color: var(--theme-main-color-light);
+  height: var(--inaltime-meniu);
 }
 
-ul.meniu-navigare li div.text-icon, ul.meniu-navigare li div.image-icon {
-    display: inline-block;
-    cursor: pointer;
+ul.meniu-navigare {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
 }
-
-ul.meniu-navigare ul {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-    list-style-type: none;
-    position: relative;
-    left: -1px;
-    background-color: var(--theme-main-color-light);
-    padding: 0; 
-    margin: 0; 
-}
-
-ul.meniu-navigare{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-    margin: 0;
-}
-
-
 ul.meniu-navigare li {
-    position: relative;
-    width: 100%;
-    background-color: var(--theme-main-color-light);
-    height: var(--inaltime-meniu);
-    border: 1px solid var(--theme-main-color-dark);
-    box-sizing: border-box;
-    text-align: center;
-    font-weight: bold;
-    transition: background-color 0.5s linear; /* Adaugă o tranziție pentru toate proprietățile */}
-    
-
+  position: relative;
+  width: 100%;
+  background-color: var(--theme-main-color-light);
+  height: var(--inaltime-meniu);
+  border: 1px solid var(--theme-main-color-dark);
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.5s linear;
+}
+ul.meniu-navigare li div.text-icon {
+  display: inline-block;
+  cursor: pointer;
+}
+ul.meniu-navigare li div.image-icon {
+  display: inline-block;
+  cursor: pointer;
+}
 ul.meniu-navigare li:hover {
-    background-color: var(--theme-main-color);
-    cursor: pointer;
+  background-color: var(--theme-main-color);
+  cursor: pointer;
 }
-
-ul.meniu-navigare li:hover ul{
-    max-height: 1000px; /* Valoare mai mare decât înălțimea așteptată a submeniului */
-    transition-timing-function: ease-out;
+ul.meniu-navigare li:hover ul {
+  max-height: 1000px;
+  transition-timing-function: ease-out;
 }
-
-ul.meniu-navigare a, ul.meniu-navigare div{
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    color: var(--theme-main-color-dark);
-    display: block;
-    height: 100%;
-    line-height: var(--inaltime-meniu);
-    overflow: hidden;
-    text-shadow: 0px -30px;
-    transition: text-shadow 0.5s linear;
+ul.meniu-navigare li:hover .text-icon {
+  text-shadow: 0px 0px;
 }
-
-ul.meniu-navigare li:hover .text-icon, ul.meniu-navigare li:hover .image-icon, ul.meniu-navigare > li:hover > a{
-    text-shadow: 0px 0px;
+ul.meniu-navigare li:hover .image-icon {
+  text-shadow: 0px 0px;
 }
-
 ul.meniu-navigare li ul li a {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
-
-
 ul.meniu-navigare li ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;              
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--theme-main-color-dark);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--theme-main-color-dark);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
-
 ul.meniu-navigare li ul li:hover a::after {
-    opacity: 1;
+  opacity: 1;
 }
-
-
-
-
+ul.meniu-navigare ul {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  list-style-type: none;
+  position: relative;
+  left: -1px;
+  background-color: var(--theme-main-color-light);
+  padding: 0;
+  margin: 0;
+}
+ul.meniu-navigare a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--theme-main-color-dark);
+  display: block;
+  height: 100%;
+  line-height: var(--inaltime-meniu);
+  overflow: hidden;
+  text-shadow: 0px -30px;
+  transition: text-shadow 0.5s linear;
+}
+ul.meniu-navigare div {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--theme-main-color-dark);
+  display: block;
+  height: 100%;
+  line-height: var(--inaltime-meniu);
+  overflow: hidden;
+  text-shadow: 0px -30px;
+  transition: text-shadow 0.5s linear;
+}
+ul.meniu-navigare > li:hover > a {
+  text-shadow: 0px 0px;
+}
