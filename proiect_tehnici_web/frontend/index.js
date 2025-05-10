@@ -26,7 +26,7 @@ app.get("/favicon.ico", function(req, res, next){
 
 app.get(["/", "/index", "/home"], function(req, res, next){
     res.render("pagini/index", {ip: req.ip, imagini: obGlobal.obImagini.imagini});
-})
+});
 
 app.get("/meniu", function(req, res, next){
     res.render("pagini/meniu")
@@ -156,6 +156,29 @@ function initImagini(){
     // console.log(obGlobal.obImagini)
 }
 initImagini();
+
+// după initImagini(), înainte de celelalte GET-uri „catch-all”:
+app.get("/galerie-animata", (req, res) => {
+    // 1. toată lista de imagini
+    const all = obGlobal.obImagini.imagini;
+  
+    // 2. filtrează doar pe cele cu indice par
+    const evenImgs = all.filter((_, i) => i % 2 === 0);
+  
+    // 3. alege aleator o putere a lui 2 ∈ {2,4,8,16}
+    const powers = [2, 4, 8, 16];
+    const count  = powers[Math.floor(Math.random() * powers.length)];
+  
+    // 4. ia primele `count` imagini
+    const images = evenImgs.slice(0, count);
+  
+    // 5. transmite la view
+    res.render("pagini/galerie-animata", {
+      images,      // array de obiecte { fisier_imagine, … }
+      count,       // numărul de imagini
+      delayPerImg: 5  // secunde
+    });
+  });
 
 function afisareEroare(res, identificator, titlu, text, imagine){
     let eroare= obGlobal.obErori.info_erori.find(function(elem){ 

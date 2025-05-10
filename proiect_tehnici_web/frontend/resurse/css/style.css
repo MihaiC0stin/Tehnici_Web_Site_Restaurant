@@ -805,3 +805,29 @@ figcaption::before {
     filter: blur(3px);
   }
   
+
+  #grid-galerie-dinamica {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    border: 20px solid transparent;
+    border-image: url('/resurse/imagini/galerie/briose-frisca.png') 30 round;
+    overflow: hidden;
+  }
+  
+  #grid-galerie-dinamica figure {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    clip-path: inset(50% 0 50% 0);
+    transition: none;
+    z-index: 0;
+    filter: brightness(1) saturate(1);
+  }
+  
+  #grid-galerie-dinamica figure.active {
+    z-index: 1; /* e deasupra */
+  }
+  
