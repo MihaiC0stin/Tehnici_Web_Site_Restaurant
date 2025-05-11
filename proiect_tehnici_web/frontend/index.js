@@ -36,6 +36,10 @@ app.get("/galerie-statica", function(req, res, next){
     res.render("pagini/galerie-statica", {imagini: obGlobal.obImagini.imagini});
 });
 
+app.get("/galerie-dinamica", function(req, res, next){
+    res.render("pagini/galerie-dinamica", {imagini: obGlobal.obImagini.imagini});
+});
+
 obGlobal = {
     obErori: null,
     obImagini: null,

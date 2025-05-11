@@ -378,7 +378,7 @@
             </section>
         </div>
         <section id="galerie-statica">
-            <%- include("../fragmente/galerie.ejs") %>
+            <%- include("../fragmente/galerie-statica-frag.ejs") %>
         </section>
         <div class="efect-css-stilizare-hr">
             <hr>
@@ -424,150 +424,8 @@
         </div>
 
         <section id="galerie-dinamica">
-            <h2>Galerie Dinamică</h2>
-            <p>Acesta este un exemplu de galerie dinamică care se va schimba în funcție de data curentă.</p>
-
-            <%
-                // toate imaginile luate din array-ul transmis de server
-                const toateImaginile = locals.imagini;
-
-                // filtrez doar pe cele cu indice par
-                const imaginiPerechi = toateImaginile.filter((_, i) => i % 2 === 0);
-
-                // am definit un array cu puterile lui 2
-                const variantePuteri = [2, 4, 8, 16];
-
-                // aici alege o putere aleatoare inmultesc random cu marimea vectorului si scap de partea zecimaala
-                const nrImaginiGalerie = variantePuteri[Math.floor(Math.random() * variantePuteri.length)];
-
-                // obţii array-ul final
-                const imaginiGalerie = imaginiPerechi.slice(0, nrImaginiGalerie);
-
-                // 5. defineşti delay-ul
-                const delayPerImg = 5;
-            %>
-          
-              <p>Numărul de imagini din galerie: <strong><%= nrImaginiGalerie %></strong></p>
-              <p>Delay-ul pentru fiecare imagine: <strong><%= delayPerImg %> secunde</strong></p>
-
-            <div id="grid-galerie-dinamica">
-                <% imaginiGalerie.forEach((img, idx) => { %>
-                  <figure>
-                    <picture>
-                      <source srcset="<%= img.fisier_imagine_mic %>" media="screen and (max-width:800px)">
-                      <source srcset="<%= img.fisier_imagine_mediu %>" media="screen and (max-width:1100px)">
-                      <img src="<%= img.fisier_imagine %>"
-                           alt="<%= img.continut_alternativ || img.nume_poza %>"
-                           title="<%= img.descriere_poza %>">
-                    </picture>
-                  </figure>
-                <% }) %>
-            </div>
-          
-            <% 
-                // Scriptul JS pentru galerie animată
-                // (codul de mai jos va rula în browser, nu pe server ca acest comentariu EJS)
-            %>
-              <script>
-                // executa script dupa ce pagina a fost incarcata complet
-                document.addEventListener("DOMContentLoaded", () => {
-                  const figuri  = document.querySelectorAll("#grid-galerie-dinamica figure");
-                  const galerie = document.getElementById("grid-galerie-dinamica");
-                  if (!figuri.length || !galerie) return;
-                
-                  // parametri
-                  const durataMs       = Number("<%- delayPerImg %>") * 1000;
-                  const startBright    = 1.5, endBright    = 1.0;
-                  const startSat       = 0.7, endSat       = 1.0;
-                  const startOpacity   = 0.3, endOpacity   = 1.0;
-                
-                  let idx        = 0;
-                  let startTime  = null;
-                  let progress   = 0;
-                  let rafId      = null;
-                  let paused     = false;
-                
-                  // Setează starea inițială „ceață” a unei figuri
-                  function prep(fig) {
-                    fig.style.opacity   = startOpacity;
-                    fig.style.clipPath  = "inset(50% 0 50% 0)";
-                    fig.style.filter    = `brightness(${startBright}) saturate(${startSat})`;
-                    fig.style.zIndex    = 1;
-                  }
-                
-                  // Resetează restul imaginilor (fundal)
-                  function resetOthers(active) {
-                    figuri.forEach(f => {
-                      if (f !== active) {
-                        f.style.opacity   = 0;
-                        f.style.clipPath  = "inset(0% 0 0% 0)";
-                        f.style.filter    = `brightness(${endBright}) saturate(${endSat})`;
-                        f.style.zIndex    = 0;
-                      }
-                    });
-                  }
-                
-                  // Funcția principală de animație
-                  function animare(ts) {
-                    // verifică dacă animația este în pauză, daca da, oprește animația
-                    if (paused) return;
-                    // daca nu este inceputa, startime-ul este setat la timpul curent
-                    if (startTime === null) startTime = ts;
-                    // calculează progresul animației
-                    const elapsed = ts - startTime;
-                    progress = Math.min(elapsed / durataMs, 1);
-                
-                    const fig    = figuri[idx];
-                    // calculează stări intermediare
-                    const b = startBright + (endBright - startBright) * progress;
-                    const s = startSat    + (endSat    - startSat)    * progress;
-                    const o = startOpacity + (endOpacity - startOpacity) * progress;
-                    const clipPct = 50 * (1 - progress);
-                
-                    // aplică starea curentă
-                    fig.style.opacity  = o;
-                    fig.style.filter   = `brightness(${b}) saturate(${s})`;
-                    fig.style.clipPath = `inset(${clipPct}% 0 ${clipPct}% 0)`;
-                
-                    if (progress < 1) {
-                      rafId = requestAnimationFrame(animare);
-                    } else {
-                        // finalizează complet figura curentă
-                        fig.style.opacity   = endOpacity;
-                        fig.style.filter    = `brightness(${endBright}) saturate(${endSat})`;
-                        fig.style.clipPath  = `inset(0% 0 0% 0)`;
-                        fig.style.zIndex    = 0;
-                
-                      // pregătește următoarea imagine
-                      resetOthers(figuri[idx]);
-                      idx = (idx + 1) % figuri.length;
-                      prep(figuri[idx]);
-                      startTime = null;
-                      progress  = 0;
-                      rafId = requestAnimationFrame(animare);
-                    }
-                  }
-                
-                  // control pauză / reluare
-                  galerie.addEventListener("mouseenter", () => {
-                    paused = true;
-                    cancelAnimationFrame(rafId);
-                  });
-                  galerie.addEventListener("mouseleave", () => {
-                    if (paused) {
-                      paused    = false;
-                      // recalibrează timpul pentru a păstra progress-ul
-                      startTime = performance.now() - progress * durataMs;
-                      rafId     = requestAnimationFrame(animare);
-                    }
-                  });
-                
-                  // pornire inițială
-                  prep(figuri[0]);
-                  resetOthers(figuri[0]);
-                  rafId = requestAnimationFrame(animare);
-                });
-                </script>
+            <%- include("../fragmente/galerie-dinamica-frag.ejs") %>
+        </section>
            
     </main>
     <%- include("../fragmente/footer.ejs") %>

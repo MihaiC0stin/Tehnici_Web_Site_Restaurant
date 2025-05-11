@@ -147,78 +147,6 @@ footer{
     max-width: 2000px;
     width: 100%;
     }
-
-    #grid-galerie {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3rem;
-        /* grid-auto-rows: 300px; */
-        margin-bottom: 5rem;
-    }
-    
-    #grid-galerie figure:nth-child(8n+1) {
-        /* grid-area: 1/1/1/2;  */
-        grid-row-start: calc(var(--g) * 4 + 1);
-        grid-column-start: 1;
-        grid-row-end: calc(var(--g) * 4 + 1);
-        grid-column-end: 2;
-    }
-    
-    #grid-galerie figure:nth-child(8n+2) {
-        /* grid-area: 1/2/1/3;  */
-        grid-row-start: calc(var(--g) * 4 + 1);
-        grid-column-start: 2;
-        grid-row-end: calc(var(--g) * 4 + 1);
-        grid-column-end: 3;
-    }
-    
-    #grid-galerie figure:nth-child(8n+3) {
-        /* grid-area: 2/1/2/2;  */
-        grid-row-start: calc(var(--g) * 4 + 2);
-        grid-column-start: 1;
-        grid-row-end: calc(var(--g) * 4 + 2);
-        grid-column-end: 2;
-    }
-    
-    #grid-galerie figure:nth-child(8n+4) {
-        /* grid-area: 2/3/2/4;  */
-        grid-row-start: calc(var(--g) * 4 + 2);
-        grid-column-start: 3;
-        grid-row-end: calc(var(--g) * 4 + 2);
-        grid-column-end: 4;
-    }
-    
-    #grid-galerie figure:nth-child(8n+5) {
-        /* grid-area: 3/2/3/3;  */
-        grid-row-start: calc(var(--g) * 4 + 3);
-        grid-column-start: 2;
-        grid-row-end: calc(var(--g) * 4 + 3);
-        grid-column-end: 3;
-    }
-    
-    #grid-galerie figure:nth-child(8n+6) {
-        /* grid-area: 3/3/3/4;  */
-        grid-row-start: calc(var(--g) * 4 + 3);
-        grid-column-start: 3;
-        grid-row-end: calc(var(--g) * 4 + 3);
-        grid-column-end: 4;
-    }
-    #grid-galerie figure:nth-child(8n+7) {
-        /* grid-area: 4/1/4/2;  */
-        grid-row-start: calc(var(--g) * 4 + 4);
-        grid-column-start: 1;
-        grid-row-end: calc(var(--g) * 4 + 4);
-        grid-column-end: 2;
-    }
-    
-    #grid-galerie figure:nth-child(8n+8) {
-        /* grid-area: 4/3/4/4;  */
-        grid-row-start: calc(var(--g) * 4 + 4);
-        grid-column-start: 3;
-        grid-row-end: calc(var(--g) * 4 + 4);
-        grid-column-end: 4;
-    }
-
 }
 
 @media (min-width: 801px) and (max-width: 1100px)  {
@@ -252,14 +180,6 @@ footer{
     min-width: 500px;
     max-width: 700px;
     width: 100%;
-    }
-
-    #grid-galerie {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* gap: 2rem; */
-        /* grid-auto-rows: 300px; */
-        margin-bottom: 5rem;
     }
 }
 
@@ -311,10 +231,6 @@ footer{
         grid-auto-rows: 300px;
         margin-bottom: 5rem;
     } */
-
-    #grid-galerie {
-        display: block;
-    }
 }   
 
 
@@ -704,42 +620,6 @@ text-shadow: 2px 2px 4px black;
 }
 
 
-
-
-
-#grid-galerie figure img {
-    filter: sepia(100%);
-    transition: filter 800ms ease;
-}
-
-#grid-galerie figure figcaption {
-    /* text-align: center; */
-    color: gray;
-    transition: color 800ms ease, text-shadow 800ms ease;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-}
-
-#grid-galerie figure:hover img {
-    filter: sepia(0%);
-}
-
-#grid-galerie figure:hover figcaption {
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-figure {
-    counter-increment: galerie-counter;
-}
-
-figcaption::before {
-    content: counter(galerie-counter, lower-roman) ". ";
-    font-weight: bold;
-    margin-right: 0.3em;
-}
-
 .efect-css-stilizare-hr {
     position: relative;
     width: 50%;
@@ -799,35 +679,9 @@ figcaption::before {
     transition: transform 1s linear, filter 1s linear;
   }
   
-  /* La hover pe text, modificăm reflexia */
+  /* La hover pe text, se modifică reflexia */
   #container-text:hover #text-reflectat {
     transform: rotateX(180deg) skewX(-45deg) scaleY(0.7) translate(10px, -35px);
     filter: blur(3px);
-  }
-  
-
-  #grid-galerie-dinamica {
-    position: relative;
-    width: 400px;
-    height: 300px;
-    margin: 0 auto;
-    border: 20px solid transparent;
-    border-image: url('/resurse/imagini/galerie/briose-frisca.png') 30 round;
-    overflow: hidden;
-  }
-  
-  #grid-galerie-dinamica figure {
-    position: absolute;
-    inset: 0;
-    margin: 0;
-    opacity: 0;
-    clip-path: inset(50% 0 50% 0);
-    transition: none;
-    z-index: 0;
-    filter: brightness(1) saturate(1);
-  }
-  
-  #grid-galerie-dinamica figure.active {
-    z-index: 1; /* e deasupra */
   }
   
