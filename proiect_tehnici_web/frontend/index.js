@@ -3,6 +3,27 @@ const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
 const sass = require('sass');
+const pg = require('pg');
+
+const Client=pg.Client;
+
+client=new Client({
+    database:"tehniciweb",
+    user:"mihai",
+    password:"mihai",
+    host:"localhost",
+    port:5432
+})
+
+client.connect()
+client.query("select * from prajituri", function(err, rezultat ){
+    console.log(err)    
+    console.log(rezultat)
+})
+client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezultat ){
+    console.log(err)    
+    console.log(rezultat)
+})
 
 app = express();
 
@@ -212,6 +233,29 @@ function afisareEroare(res, identificator, titlu, text, imagine){
     })
 
 }
+
+app.get("/produse", function(req, res){
+    console.log(req.query)
+    var conditieQuery=""; // TO DO where din parametri
+
+
+    queryOptiuni=""
+    client.query(queryOptiuni, function(err, rezOptiuni){
+        console.log(rezOptiuni)
+
+
+        queryProduse=""
+        client.query(queryProduse, function(err, rez){
+            if (err){
+                console.log(err);
+                afisareEroare(res, 2);
+            }
+            else{
+                res.render("pagini/produse", {produse: rez.rows, optiuni:rezOptiuni.rows})
+            }
+        })
+    });
+})
 
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req, res, next){
     afisareEroare(res, 403);
