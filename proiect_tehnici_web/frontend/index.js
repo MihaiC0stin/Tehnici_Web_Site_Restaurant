@@ -104,20 +104,20 @@ function compileazaScss(caleScss, caleCss){
     // fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap)); //stringify transforma un obiect JavaScript in string JSON
 }
 
-vFisiere=fs.readdirSync(obGlobal.folderScss);
+vFisiere=fs.readdirSync(obGlobal.folderScss); // citeste fisierele din folderul scss
 for( let numeFis of vFisiere ){
-    if (path.extname(numeFis)==".scss"){
+    if (path.extname(numeFis)==".scss"){ // verifica extensia fisierului
         compileazaScss(numeFis);
     }
 }
 
 
-fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
+fs.watch(obGlobal.folderScss, function(eveniment, numeFis){  // asculta evenimentele din folderul scss si apeleaza functia callback
     console.log(eveniment, numeFis);
-    if (eveniment=="change" || eveniment=="rename"){
-        let caleCompleta=path.join(obGlobal.folderScss, numeFis);
-        if (fs.existsSync(caleCompleta)){
-            compileazaScss(caleCompleta);
+    if (eveniment=="change" || eveniment=="rename"){ // verifica daca evenimentul este de tip change sau rename
+        let caleCompleta=path.join(obGlobal.folderScss, numeFis); // genereaza calea completa
+        if (fs.existsSync(caleCompleta)){ // verifica daca fisierul exista
+            compileazaScss(caleCompleta); // compileaza fisierul
         }
     }
 })
