@@ -16,28 +16,28 @@
             transition: none;
             z-index: 0;
             filter: brightness(1) saturate(1);
-        }
 
-        .figcaption-text {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 15%;
-        background-color: rgba(255, 255, 255, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        z-index: 2;
-        }
-
-        .figcaption-text h3 {
-        margin: 0;
-        padding: 0;
-        font-size: 1rem;
-        color: black;
-        font-weight: bold;
+            .figcaption-text {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 15%;
+                background-color: rgba(255, 255, 255, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                z-index: 2;
+    
+                h3 {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 1rem;
+                    color: black;
+                    font-weight: bold;
+                }
+            }
         }
     }
 }

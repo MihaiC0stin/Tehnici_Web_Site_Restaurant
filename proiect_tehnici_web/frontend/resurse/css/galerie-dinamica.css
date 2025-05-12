@@ -18,7 +18,7 @@
     z-index: 0;
     filter: brightness(1) saturate(1);
   }
-  #grid-galerie-dinamica .figcaption-text {
+  #grid-galerie-dinamica figure .figcaption-text {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -31,7 +31,7 @@
     text-align: center;
     z-index: 2;
   }
-  #grid-galerie-dinamica .figcaption-text h3 {
+  #grid-galerie-dinamica figure .figcaption-text h3 {
     margin: 0;
     padding: 0;
     font-size: 1rem;
