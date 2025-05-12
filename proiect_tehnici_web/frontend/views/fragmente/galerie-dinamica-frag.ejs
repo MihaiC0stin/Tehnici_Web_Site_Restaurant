@@ -11,10 +11,11 @@
     // am definit un array cu puterile lui 2
     const variantePuteri = [2, 4, 8, 16];
 
-    // aici alege o putere aleatoare inmultesc random cu marimea vectorului si scap de partea zecimaala
+    // aici alege un numar random intre 0 si 1, il inmulteste cu marimea array-ului si apoi scapa de partea zecimala pentru a obtine un numar intreg care sa reprezinte indexul
+    // din array-ul variantePuteri
     const nrImaginiGalerie = variantePuteri[Math.floor(Math.random() * variantePuteri.length)];
 
-    // obţii array-ul final
+    // obţii array-ul final, taie din array-ul de imagini doar primele nrImaginiGalerie elemente
     const imaginiGalerie = imaginiPerechi.slice(0, nrImaginiGalerie);
 
     // 5. defineşti delay-ul
@@ -46,25 +47,27 @@
     // (codul de mai jos va rula în browser, nu pe server ca acest comentariu EJS)
 %>
     <script>
-    // executa script dupa ce pagina a fost incarcata complet
+    // document.addEventListener() este folosit pentru a ii spune browser-ului sa execute o functie daca se intampla un anume eveniment
+    // in acest caz, evenimentul este "DOMContentLoaded", care se declanseaza atunci cand documentul HTML a fost complet incarcat si analizat
     document.addEventListener("DOMContentLoaded", () => {
-        const figuri  = document.querySelectorAll("#grid-galerie-dinamica figure");
-        const galerie = document.getElementById("grid-galerie-dinamica");
+        const figuri  = document.querySelectorAll("#grid-galerie-dinamica figure"); // creaza un obiect NodeList cu toate figurile din galerie
+        const galerie = document.getElementById("grid-galerie-dinamica"); // selecteaza div-ul care contine galeria, variabila galerie o sa contina textul din div-ul respectiv
+        
         if (!figuri.length || !galerie) return;
     
         // parametri
-        const durataMs       = Number("<%- delayPerImg %>") * 1000;
-        const startBright    = 1.5, endBright    = 1.0;
-        const startSat       = 0.7, endSat       = 1.0;
-        const startOpacity   = 0.3, endOpacity   = 1.0;
+        const durataMs       = Number("<%- delayPerImg %>") * 1000; // in cazul nostru 5 * 1000 = 5000ms, transformam '5' in nuamr
+        const startBright    = 1.5, endBright    = 1.0; // luminozitatea initiala si finala
+        const startSat       = 0.7, endSat       = 1.0; // saturatia initiala si finala
+        const startOpacity   = 0.3, endOpacity   = 1.0; // opacitatea initiala si finala
     
-        let idx        = 0;
-        let startTime  = null;
-        let progress   = 0;
-        let rafId      = null;
-        let paused     = false;
+        let idx        = 0; // indexul imaginii curente
+        let startTime  = null; // timpul de start al animatiei
+        let progress   = 0; // progresul animatiei
+        let rafId      = null; // id-ul requestAnimationFrame
+        let paused     = false; // variabila care verifica daca animatia este in pauza
     
-        // Setează starea inițială „ceață” a unei figuri
+        // Setează stilul initial pentru fiecare figură
         function prep(fig) {
         fig.style.opacity   = startOpacity;
         fig.style.clipPath  = "inset(50% 0 50% 0)";
@@ -84,30 +87,30 @@
             });
         }
     
-        // Funcția principală de animație
+        // Funcția principală de animație, care va fi apelată de requestAnimationFrame, cu parametrii ts (timestamp) care reprezintă timpul scurs de la inceputul incarcarii paginii
         function animare(ts) {
             // verifică dacă animația este în pauză, daca da, oprește animația
             if (paused) return;
             // daca nu este inceputa, startime-ul este setat la timpul curent
             if (startTime === null) startTime = ts;
             // calculează progresul animației
-            const elapsed = ts - startTime;
-            progress = Math.min(elapsed / durataMs, 1);
+            const elapsed = ts - startTime; // timpul scurs de la inceputul animatiei
+            progress = Math.min(elapsed / durataMs, 1); // calculează progresul ca procent din durata totală (daca animatia dureaza 5000 ms, si a trecut 2000ms, progress va fi 0.4)
         
-            const fig    = figuri[idx];
+            const fig = figuri[idx]; // figura curentă
             // calculează stări intermediare
-            const b = startBright + (endBright - startBright) * progress;
-            const s = startSat    + (endSat    - startSat)    * progress;
-            const o = startOpacity + (endOpacity - startOpacity) * progress;
-            const clipPct = 50 * (1 - progress);
+            const b = startBright + (endBright - startBright) * progress; // luminozitatea curentă
+            const s = startSat    + (endSat    - startSat)    * progress; // saturatia curentă
+            const o = startOpacity + (endOpacity - startOpacity) * progress; // opacitatea curentă
+            const clipPct = 50 * (1 - progress); // procentajul de tăiere a imaginii (50% la început, 0% la final)
         
             // aplică starea curentă
             fig.style.opacity  = o;
-            fig.style.filter   = `brightness(${b}) saturate(${s})`;
+            fig.style.filter   = `brightness(${b}) saturate(${s})`; // ${b} si ${s} sunt template strings, adica variabilele b si s vor fi inlocuite cu valorile lor
             fig.style.clipPath = `inset(${clipPct}% 0 ${clipPct}% 0)`;
         
             if (progress < 1) {
-                rafId = requestAnimationFrame(animare);
+                rafId = requestAnimationFrame(animare); // cere browser-ului sa execute animatia in urmatorul frame, rafId va contine id-ul cererii
             } else {
                 // finalizează complet figura curentă
                 fig.style.opacity   = endOpacity;
@@ -124,22 +127,22 @@
 
                 // adaugă delay de 1000ms înainte de a începe următoarea animație
                 setTimeout(() => {
-                    rafId = requestAnimationFrame(animare);
+                    rafId = requestAnimationFrame(animare); // cere browser-ului sa execute animatia in urmatorul frame
                 }, 1000); // 1000 ms = 1 secundă
             }
         }
     
         // control pauză / reluare
         galerie.addEventListener("mouseenter", () => {
-        paused = true;
-        cancelAnimationFrame(rafId);
+        paused = true; // variabila booleana devine true, deci animatia este in pauza
+        cancelAnimationFrame(rafId); // oprește animația curentă folosind id-ul rafId
         });
         galerie.addEventListener("mouseleave", () => {
         if (paused) {
-            paused    = false;
+            paused    = false;  // variabila booleana devine false, deci animatia nu mai este in pauza
             // recalibrează timpul pentru a păstra progress-ul
-            startTime = performance.now() - progress * durataMs;
-            rafId     = requestAnimationFrame(animare);
+            startTime = performance.now() - progress * durataMs; // timpul curent - progresul * durata animatiei (exemplu: 12000ms - 0.4 * 5000ms = 10000ms) pentru a pastra progresul
+            rafId     = requestAnimationFrame(animare); // cere browser-ului sa execute animatia in urmatorul frame, reluam animatia
         }
         });
     

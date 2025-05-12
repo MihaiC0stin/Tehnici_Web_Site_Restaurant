@@ -16,14 +16,6 @@ client=new Client({
 })
 
 client.connect()
-client.query("select * from prajituri", function(err, rezultat ){
-    console.log(err)    
-    console.log(rezultat)
-})
-client.query("select * from unnest(enum_range(null::categ_prajitura))", function(err, rezultat ){
-    console.log(err)    
-    console.log(rezultat)
-})
 
 app = express();
 
@@ -79,38 +71,37 @@ for(let folder of vect_foldere){
 
 
 function compileazaScss(caleScss, caleCss){
-    // console.log("cale:",caleCss);
     if(!caleCss){
-
+        // daca nu avem caleCss, o generam
         let numeFisExt=path.basename(caleScss);
+        // scoatem doar numele fisierului si extensia
         let numeFis=numeFisExt.split(".")[0]   /// "a.scss"  -> ["a","scss"]
-        caleCss=numeFis+".css";
+        caleCss=numeFis+".css"; /// adaugam extensia css
     }
     
     if (!path.isAbsolute(caleScss))
-        caleScss=path.join(obGlobal.folderScss,caleScss )
+        caleScss=path.join(obGlobal.folderScss,caleScss ) // caleScss devine cale absoluta
     if (!path.isAbsolute(caleCss))
-        caleCss=path.join(obGlobal.folderCss,caleCss )
+        caleCss=path.join(obGlobal.folderCss,caleCss ) // caleCss devine cale absoluta
     
 
     let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
-    if (!fs.existsSync(caleBackup)) {
-        fs.mkdirSync(caleBackup,{recursive:true})
+    if (!fs.existsSync(caleBackup)) { // verifica daca exista folderul backup
+        fs.mkdirSync(caleBackup,{recursive:true}) // creeaza folderul backup recursiv, adica daca nu avem folderul resurse, il creeaza, la fel si pe css
     }
     
     // la acest punct avem cai absolute in caleScss si  caleCss
 
-    let numeFisCss=path.basename(caleCss, ".css")+ "_" + (new Date()).getTime() + ".css";
-    if (fs.existsSync(caleCss)){
-        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",numeFisCss ));
+    let numeFisCss=path.basename(caleCss, ".css")+ "_" + (new Date()).getTime() + ".css"; // cu basename luam numele fisierului fara extensie, adaugam _ si apoi timestamp si extensia
+    if (fs.existsSync(caleCss)){ // verifica daca exista fisierul css
+        fs.copyFileSync(caleCss, path.join(caleBackup, numeFisCss )); // copiaza fisierul css in folderul backup unind cele doua cai
     }
-    rez=sass.compile(caleScss, {
+
+    rez=sass.compile(caleScss, { // compileaza fisierul scss
         "sourceMap": true,
         "quietDeps": true});
     fs.writeFileSync(caleCss,rez.css);
-    // fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap));
-
-    
+    // fs.writeFileSync(caleScss + ".map", JSON.stringify(rez.sourceMap)); //stringify transforma un obiect JavaScript in string JSON
 }
 
 vFisiere=fs.readdirSync(obGlobal.folderScss);
@@ -153,57 +144,35 @@ function pathBrowser(caleFisier) {
 }
 
 function initImagini(){
-    var continut= fs.readFileSync(path.join(__dirname,"resurse/json/galerie.json")).toString("utf-8");
+    var continut= fs.readFileSync(path.join(__dirname,"resurse/json/galerie.json")).toString("utf-8"); // citim fisierul json ca text
 
-    obGlobal.obImagini=JSON.parse(continut);
-    let vImagini=obGlobal.obImagini.imagini;
 
-    let caleAbs=path.join(__dirname,obGlobal.obImagini.cale_galerie);
-    let caleAbsMediu=path.join(__dirname,obGlobal.obImagini.cale_galerie, "mediu");
+    obGlobal.obImagini=JSON.parse(continut); //parsam textul in obiect javascript
+    let vImagini=obGlobal.obImagini.imagini; // extragem vectorul de imagini
+
+    let caleAbs=path.join(__dirname,obGlobal.obImagini.cale_galerie); // generam calea absoluta
+    let caleAbsMediu=path.join(__dirname,obGlobal.obImagini.cale_galerie, "mediu"); // generam calea absoluta pentru mediu
     if (!fs.existsSync(caleAbsMediu))
-        fs.mkdirSync(caleAbsMediu);
-    let caleAbsMic=path.join(__dirname,obGlobal.obImagini.cale_galerie, "mic");
+        fs.mkdirSync(caleAbsMediu); // creaza folderul mediu
+    let caleAbsMic=path.join(__dirname,obGlobal.obImagini.cale_galerie, "mic"); // generam calea absoluta pentru mic
     if (!fs.existsSync(caleAbsMic))
-        fs.mkdirSync(caleAbsMic);
+        fs.mkdirSync(caleAbsMic); // creaza folderul mic
 
-    //for (let i=0; i< vErori.length; i++ )
-    for (let imag of vImagini){
-        [numeFis, ext]=imag.fisier_imagine.split(".");
-        let caleFisAbs=path.join(caleAbs,imag.fisier_imagine);
-        let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
-        let caleFisMicAbs=path.join(caleAbsMic, numeFis+".webp");
-        sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs);
-        sharp(caleFisAbs).resize(200).toFile(caleFisMicAbs);
-        imag.fisier_imagine_mediu=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, "mediu",numeFis+".webp" ));
-        imag.fisier_imagine_mic=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, "mic",numeFis+".webp" ));
-        imag.fisier_imagine=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier_imagine ));     
+    for (let imag of vImagini){ // parcurgem vectorul de imagini 1 cate 1
+        [numeFis, ext]=imag.fisier_imagine.split(".");  //imaginea are numele si extensia
+        let caleFisAbs=path.join(caleAbs,imag.fisier_imagine); // generam calea absoluta
+        let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp"); // generam calea absoluta pentru mediu
+        let caleFisMicAbs=path.join(caleAbsMic, numeFis+".webp"); // generam calea absoluta pentru mic
+        sharp(caleFisAbs).resize(300).toFile(caleFisMediuAbs); // redimensionam imaginea la 300px
+        sharp(caleFisAbs).resize(200).toFile(caleFisMicAbs); // redimensionam imaginea la 200px
+        imag.fisier_imagine_mediu=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, "mediu",numeFis+".webp" )); // generam calea pentru imaginea medie
+        imag.fisier_imagine_mic=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, "mic",numeFis+".webp" )); // generam calea pentru imaginea mica
+        imag.fisier_imagine=pathBrowser(path.join("/", obGlobal.obImagini.cale_galerie, imag.fisier_imagine )); // generam calea pentru imaginea mare
     }
     // console.log(obGlobal.obImagini)
 }
 initImagini();
 
-// după initImagini(), înainte de celelalte GET-uri „catch-all”:
-app.get("/galerie-animata", (req, res) => {
-    // 1. toată lista de imagini
-    const all = obGlobal.obImagini.imagini;
-  
-    // 2. filtrează doar pe cele cu indice par
-    const evenImgs = all.filter((_, i) => i % 2 === 0);
-  
-    // 3. alege aleator o putere a lui 2 ∈ {2,4,8,16}
-    const powers = [2, 4, 8, 16];
-    const count  = powers[Math.floor(Math.random() * powers.length)];
-  
-    // 4. ia primele `count` imagini
-    const images = evenImgs.slice(0, count);
-  
-    // 5. transmite la view
-    res.render("pagini/galerie-animata", {
-      images,      // array de obiecte { fisier_imagine, … }
-      count,       // numărul de imagini
-      delayPerImg: 5  // secunde
-    });
-  });
 
 function afisareEroare(res, identificator, titlu, text, imagine){
     let eroare= obGlobal.obErori.info_erori.find(function(elem){ 
@@ -235,7 +204,7 @@ function afisareEroare(res, identificator, titlu, text, imagine){
 }
 
 app.get("/produse", function(req, res){
-    console.log(req.query)
+    // console.log(req.query)
     var conditieQuery=""; // TO DO where din parametri
 
 

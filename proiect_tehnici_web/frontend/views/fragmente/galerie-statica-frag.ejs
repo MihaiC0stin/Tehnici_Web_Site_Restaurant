@@ -4,9 +4,9 @@
         <% 
             function ziInInterval(zi, interval) {
                 let [zi_start, zi_end] = interval;
-                let idx_start = vect_zile.indexOf(zi_start);
-                let idx_end   = vect_zile.indexOf(zi_end);
-                let idx_zi    = vect_zile.indexOf(zi);
+                let idx_start = vect_zile.indexOf(zi_start); // indexul zilei de inceput
+                let idx_end   = vect_zile.indexOf(zi_end); // indexul zilei de sfarsit
+                let idx_zi    = vect_zile.indexOf(zi);  // indexul zilei curente
 
                 if (idx_start <= idx_end) {
                     return idx_zi >= idx_start && idx_zi <= idx_end;
@@ -17,7 +17,7 @@
             }
             
             function imaginiValidePeZi(imagini, ziua_curenta) {
-                return imagini.filter(imag => 
+                return imagini.filter(imag => // functia filter returneaza un array cu imaginile care indeplinesc conditiile (true), daca e false il ignora
                     imag.intervale_zile && imag.intervale_zile.some(interval => ziInInterval(ziua_curenta, interval))
                 );
             } %>
@@ -28,14 +28,16 @@
                 ziua_curenta = vect_zile[d.getDay()];
                 imaginiValide = imaginiValidePeZi(locals.imagini, ziua_curenta);
                 let numarImaginiValide = imaginiValide.length;
-                if(numarImaginiValide % 2 == 1){
+                if(numarImaginiValide % 2 == 1){ // daca numarul de imagini este impar, eliminam ultima imagine, vrem numar par de imagini
                     numarImaginiValide -= 1;
                 } %>
             <%
-                for (let i = 0; i < numarImaginiValide; i++) {
-                    let imag = imaginiValide[i]; 
-                    let g = Math.floor(i / 8); %>
-                    <figure style="--g: <%= g %>;"> 
+                for (let i = 0; i < numarImaginiValide; i++) { // parcurgem imaginile valide
+                    let imag = imaginiValide[i];  // imaginea curenta
+                    let g = Math.floor(i / 8);  // g este numarul grupului, cate 8 imagini pe grup (avem 4 randuri care fac patternul cu cate 2 imagini fiecare,
+                    //  dupa patternul este reluat)
+            %>
+                    <figure style="--g: <%= g %>;"> <% // transmit variabila g in style pentru #grid-galerie figure %>
                         <picture>
                             <source srcset="<%= imag.fisier_imagine_mic %>" media="screen and (max-width: 800px)">
                             <source srcset="<%= imag.fisier_imagine_mediu %>" media="screen and (max-width: 1100px)">
