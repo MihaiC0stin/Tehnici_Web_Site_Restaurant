@@ -41,9 +41,6 @@ app.get(["/", "/index", "/home"], function(req, res, next){
     res.render("pagini/index", {ip: req.ip, imagini: obGlobal.obImagini.imagini});
 });
 
-app.get("/meniu", function(req, res, next){
-    res.render("pagini/meniu")
-});
 
 app.get("/galerie-statica", function(req, res, next){
     res.render("pagini/galerie-statica", {imagini: obGlobal.obImagini.imagini});
@@ -203,24 +200,23 @@ function afisareEroare(res, identificator, titlu, text, imagine){
 
 }
 
-app.get("/produse", function(req, res){
+app.get("/meniu", function(req, res){
     // console.log(req.query)
     var conditieQuery=""; // TO DO where din parametri
 
 
-    queryOptiuni=""
+    queryOptiuni="select * from unnest(enum_range(null::categorie_produse))"
     client.query(queryOptiuni, function(err, rezOptiuni){
-        console.log(rezOptiuni)
 
 
-        queryProduse=""
+        queryProduse="select * from produse";
         client.query(queryProduse, function(err, rez){
             if (err){
                 console.log(err);
                 afisareEroare(res, 2);
             }
             else{
-                res.render("pagini/produse", {produse: rez.rows, optiuni:rezOptiuni.rows})
+                res.render("pagini/meniu", {produse: rez.rows, optiuni:rezOptiuni.rows})
             }
         })
     });
