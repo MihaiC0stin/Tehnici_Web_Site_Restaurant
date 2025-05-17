@@ -31,8 +31,11 @@
         <li><a href="/contact">Contact</a></li>
         <li><a href="/meniu">Meniu</a>
             <ul>
-                <li><a href="/meniu#meniu-mancare">Mancare</a></li>
-                <li><a href="/meniu#meniu-bauturi">Bauturi</a></li>
+                <!-- <li><a href="/meniu?categorie=mancare">Mancare</a></li>
+                <li><a href="/meniu?categorie=bautura">Bauturi</a></li> -->
+                <% for (let opt of locals.optiuniMeniu) { %>
+                    <li><a href="/meniu?categorie=<%= opt.unnest %>"><%= opt.unnest %></a></li>
+                <% } %>
             </ul>
         </li>
     </ul>

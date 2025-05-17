@@ -27,7 +27,10 @@ console.log("__dirname:", __dirname);
 console.log("__filename:", __filename);
 console.log("process.cwd():", process.cwd());
 
-
+app.use("/{*any}", function(req, res, next){
+    res.locals.optiuniMeniu=obGlobal.optiuniMeniu;
+    next();
+})
 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")));
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
@@ -55,8 +58,26 @@ obGlobal = {
     obImagini: null,
     folderScss: path.join(__dirname, "resurse/scss"),
     folderCss: path.join(__dirname, "resurse/css"),
-    folderBackup: path.join(__dirname, "resurse/backup")
+    folderBackup: path.join(__dirname, "resurse/backup"),
+    optiuniMeniu: null
 }
+
+
+client.query("select * from unnest(enum_range(null::categorie_produse))", function(err, rezOptiuni){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rezOptiuni.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rezOptiuni.rows);
+            obGlobal.optiuniMeniu=rezOptiuni.rows;
+        }
+    }
+})
 
 vect_foldere = ["temp", "backup", "temp1"]
 for(let folder of vect_foldere){
@@ -89,10 +110,10 @@ function compileazaScss(caleScss, caleCss){
     
     // la acest punct avem cai absolute in caleScss si  caleCss
 
-    let numeFisCss=path.basename(caleCss, ".css")+ "_" + (new Date()).getTime() + ".css"; // cu basename luam numele fisierului fara extensie, adaugam _ si apoi timestamp si extensia
-    if (fs.existsSync(caleCss)){ // verifica daca exista fisierul css
-        fs.copyFileSync(caleCss, path.join(caleBackup, numeFisCss )); // copiaza fisierul css in folderul backup unind cele doua cai
-    }
+    // let numeFisCss=path.basename(caleCss, ".css")+ "_" + (new Date()).getTime() + ".css"; // cu basename luam numele fisierului fara extensie, adaugam _ si apoi timestamp si extensia
+    // if (fs.existsSync(caleCss)){ // verifica daca exista fisierul css
+    //     fs.copyFileSync(caleCss, path.join(caleBackup, numeFisCss )); // copiaza fisierul css in folderul backup unind cele doua cai
+    // }
 
     rez=sass.compile(caleScss, { // compileaza fisierul scss
         "sourceMap": true,
@@ -203,13 +224,15 @@ function afisareEroare(res, identificator, titlu, text, imagine){
 app.get("/meniu", function(req, res){
     // console.log(req.query)
     var conditieQuery=""; // TO DO where din parametri
+    if(req.query.categorie)
+        conditieQuery=` where categorie_produs='${req.query.categorie}'`; //string in string
 
 
-    queryOptiuni="select * from unnest(enum_range(null::categorie_produse))"
+    queryOptiuni="select * from unnest(enum_range(null::specifice_mesei_zilei))"
     client.query(queryOptiuni, function(err, rezOptiuni){
 
 
-        queryProduse="select * from produse";
+        queryProduse="select * from produse" + conditieQuery;
         client.query(queryProduse, function(err, rez){
             if (err){
                 console.log(err);
@@ -220,6 +243,23 @@ app.get("/meniu", function(req, res){
             }
         })
     });
+})
+
+app.get("/produs/:id", function(req, res){
+    client.query(`select * from produse where id=${req.params.id}`, function(err, rez){
+        if (err){
+            console.log(err);
+            afisareEroare(res, 2);
+        }
+        else{
+            if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+            else{
+                res.render("pagini/produs", {prod: rez.rows[0]})
+            }
+        }
+    })
 })
 
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req, res, next){

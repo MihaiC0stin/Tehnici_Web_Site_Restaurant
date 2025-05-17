@@ -36,7 +36,7 @@
         <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0"  max="70"> <span id="infoRange">(0)</span></label>
         <label>Select simplu:
             <select id="inp-categorie">
-                <option id="sel-toate" selected value="toate">toate</option>
+                <option id="sel-toate" selected value="oricand">oricand</option>
                 <% for (let opt of locals.optiuni) { %>
                     <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
                 <% } %>
@@ -66,7 +66,7 @@
                             <p class="calorii">Calorii: <span class="val-calorii"><%- prod.calorii%></span></p>
                             <p class="gramaj">Gramaj: <span class="val-gramaj"><%- prod.gramaj%></span></p>
                         </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
+                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.specific_mesei_zilei></span></p>
                         <figure>
                             <a href="/produs/<%-prod.id %>" ><img src="/resurse/imagini/produse/<%- prod.imagine %>" style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
