@@ -1,7 +1,52 @@
 window.onload = function() {
+    let produseNesortate = document.getElementsByClassName("produs");  // HTMLCollection
+    let vectorProduseNesortate = Array.from(produseNesortate);         // Array.from() - transforma un HTMLCollection intr-un array
     btn = document.getElementById("filtrare");
+
     btn.onclick = function() {
+
+        let validareInpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
+        let validareInpDescriere = document.getElementById("inp-descriere").value.trim().toLowerCase();
+        let validareInpNumeCuAutocomplete = document.getElementById("inp-nume-cu-autocomplete").value.trim().toLowerCase();
+
+        if(validareInpNume.includes(">")){
+            document.getElementById("mesaj-eroare-inp-nume").textContent = "Numele contine caracter interzis.";
+            return;
+        }
+
+        if(validareInpDescriere.includes(">")){
+            document.getElementById("mesaj-eroare-inp-descriere").textContent = "Descrierea contine caracter interzis.";
+            return;
+        }
+
+        if(validareInpNumeCuAutocomplete.includes(">")){
+            document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "Numele cu autocomplete contine caracter interzis.";
+            return;
+        }
+
+        document.getElementById("mesaj-eroare-inp-nume").textContent = "";
+        document.getElementById("mesaj-eroare-inp-descriere").textContent = "";
+        document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "";
+
+            
+
         let inpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
+        let startInpNume ="";
+        let endInpNume = "";
+        if(inpNume.includes("*")) 
+            {
+                [startInpNume, endInpNume] = inpNume.split("*");
+            }
+        else {
+            startInpNume = inpNume;
+            endInpNume = "";
+        }
+
+
+        let inpDescriere = Array.from(document.getElementById("inp-descriere").value.trim().toLowerCase().split(/[\s,\.]+/)); // split(/[\s,\.]+/) - desparte stringul in functie de spatii, virgule si puncte
+        let inpNumeCuAutocomplete = document.getElementById("inp-nume-cu-autocomplete").value.trim().toLowerCase();
+        let inpIngredienteExcluse = Array.from(document.getElementById("inp-ingrediente-excluse").selectedOptions).map(opt => opt.value.trim().toLowerCase());
+
 
         let vectRadio = document.getElementsByName("gr_rad");
         let inpCalorii = null;
@@ -22,7 +67,9 @@ window.onload = function() {
             }
         }
 
-        let inpPret = document.getElementById("inp-pret").value;
+        let inpPretMinim = document.getElementById("inp-pret-minim").value;
+
+        let inpPretMaxim = document.getElementById("inp-pret-maxim").value;
 
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
 
@@ -34,39 +81,58 @@ window.onload = function() {
 
             let nume = prod.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase();
 
-            let cond1 = (nume.startsWith(inpNume));
+            let cond1 = (nume.startsWith(startInpNume) && nume.endsWith(endInpNume));
+
+            let descriere = prod.getElementsByClassName("val-descriere")[0].innerHTML.trim().toLowerCase();
+
+            let cond2 = inpDescriere.every(ing => descriere.includes(ing));
+
+            let cond3 = (!inpNumeCuAutocomplete) || (nume == inpNumeCuAutocomplete);
+
+            let ingrediente = prod.getElementsByClassName("val-ingrediente")[0].innerHTML.trim().toLowerCase();
+
+            let cond4 = !(inpIngredienteExcluse.some(ing => ingrediente.includes(ing)));
 
             let calorii = parseInt(prod.getElementsByClassName("val-calorii")[0].innerHTML.trim().toLowerCase());
 
-            let cond2 = ((inpCalorii == "toate") || (calorii >= minCalorii && calorii < maxCalorii));
+            let cond5 = ((inpCalorii == "toate") || (calorii >= minCalorii && calorii < maxCalorii));
 
             let pret = parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML.trim().toLowerCase());
 
-            let cond3 = (inpPret <= pret);
+            let cond6 = (inpPretMinim <= pret);
+
+            let cond7 = (inpPretMaxim >= pret);
 
             let categorie = prod.getElementsByClassName("val-categorie")[0].innerHTML.trim().toLowerCase();
 
-            let cond4 = (inpCategorie == "oricand" || inpCategorie == categorie);
+            let cond8 = (inpCategorie == "oricand" || inpCategorie == categorie);
 
 
-            if (cond1 && cond2 && cond3 && cond4) {
+            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8) {
                 prod.style.display = "block";
             }    
         }
     }
 
 
-    document.getElementById("inp-pret").onchange = function() {
-        document.getElementById("infoRange").innerHTML = `(${this.value})`; //string literals
+    document.getElementById("inp-pret-minim").onchange = function() {
+        document.getElementById("infoRangeMinim").innerHTML = `(${this.value})`; //string literals
+    }
+
+    document.getElementById("inp-pret-maxim").onchange = function() {
+        document.getElementById("infoRangeMaxim").innerHTML = `(${this.value})`; //string literals
     }
 
     document.getElementById("resetare").onclick = function() {
-        
         if(confirm("Sigur doriti sa resetati filtrele?") == false)
             return;
         document.getElementById("inp-nume").value = "";
-        document.getElementById("inp-pret").value = 0;
-        document.getElementById("infoRange").innerHTML = "(0)";
+        document.getElementById("inp-descriere").value = "";
+        document.getElementById("inp-nume-cu-autocomplete").value = "";
+        document.getElementById("inp-pret-minim").value = 0;
+        document.getElementById("infoRangeMinim").innerHTML = "(0)";
+        document.getElementById("inp-pret-maxim").value = 70;
+        document.getElementById("infoRangeMaxim").innerHTML = "(70)";
         document.getElementById("inp-categorie").value = "oricand";
 
         let vectRadio = document.getElementsByName("gr_rad");
@@ -77,20 +143,35 @@ window.onload = function() {
             }
         }
 
-        let produse = document.getElementsByClassName("produs");
-        for (let prod of produse) {
+        let inpIngredienteExcluse = document.getElementById("inp-ingrediente-excluse");
+        for(let opt of inpIngredienteExcluse.options) {
+            opt.selected = false;
+        }
+
+
+
+        for (let prod of vectorProduseNesortate) {
+            prod.parentNode.appendChild(prod);
             prod.style.display = "block";
         }
     }
 
     document.getElementById("sortCrescNume").onclick = function() {
-        sorteaza(1);
+        sorteazaPretNume(1);
     }
     document.getElementById("sortDescrescNume").onclick = function() {
-        sorteaza(-1);
+        sorteazaPretNume(-1);
     }
 
-    function sorteaza(semn) {
+    document.getElementById("sortCrescNumeDescriere").onclick = function() {
+        sorteazaNumeDescriere(1);
+    }
+    document.getElementById("sortDescrescNumeDescriere").onclick = function() {
+        sorteazaNumeDescriere(-1);
+    }
+
+
+    function sorteazaPretNume(semn) {
         let produse = document.getElementsByClassName("produs");  // HTMLCollection
         let vectorProduse = Array.from(produse);                  // Array.from() - transforma un HTMLCollection intr-un array
         vectorProduse.sort(function(a, b) { // a si b elemente tip article
@@ -110,6 +191,27 @@ window.onload = function() {
             prod.parentNode.appendChild(prod);
         }
         
+    }
+
+
+
+    function sorteazaNumeDescriere(semn) {
+        let produse = document.getElementsByClassName("produs");  // HTMLCollection
+        let vectorProduse = Array.from(produse);                  // Array.from() - transforma un HTMLCollection intr-un array
+        vectorProduse.sort(function(a, b) { // a si b elemente tip article
+            let numeA = a.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase();
+            let numeB = b.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase();
+            if (numeA != numeB) {
+                return semn*numeA.localeCompare(numeB); // -1 a < b 1 a > b
+            }
+            let descriereA = a.getElementsByClassName("val-descriere")[0].innerHTML.trim().toLowerCase();
+            let descriereB = b.getElementsByClassName("val-descriere")[0].innerHTML.trim().toLowerCase();
+            return semn*(descriereA.length - descriereB.length); // -1 a < b 1 a > b
+        });
+
+        for (let prod of vectorProduse) {
+            prod.parentNode.appendChild(prod);
+        }
     }
 
     window.onkeydown = function(e) {
@@ -133,8 +235,32 @@ window.onload = function() {
                         p1.remove();
                 }, 2000);
             }
-
         }
+    }
 
+    document.getElementById("p-suma-selectat").onclick = function() {
+        let produseSelectate = Array.from(document.getElementsByClassName("select-cos")) // facem din HTMLCollection un array, cu elemente HTMLInputElement
+        .filter(cb => cb.checked) // filtram dupa propietatea checked, cb ia fiecare element din array
+        .map(cb => cb.parentElement.parentElement); // mapam fiecare element din array la parintele parintelui -> selecteaza-cos -> produs,
+        //  map transforma fiecare element din array in altul
+        console.log(produseSelectate);
+        let sumaPreturi = 0;
+        for (let prod of produseSelectate) {
+            if(prod){
+                sumaPreturi += parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML.trim().toLowerCase());
+            }
+        }
+        if(!document.getElementById("suma_pret_produse_selectate")){
+            let pRezultat = document.createElement("p");
+            pRezultat.innerHTML = `Suma preturilor produselor afisate este: ${sumaPreturi}`;
+            pRezultat.id = "suma_pret_produse_selectate";
+            let p = document.getElementById("p-suma-selectat");
+            p.parentElement.insertBefore(pRezultat, p.nextElementSibling);
+            setTimeout(function() {
+                let p1=document.getElementById("suma_pret_produse_selectate");
+                if(p1)
+                    p1.remove();
+            }, 2000);
+        }
     }
 }

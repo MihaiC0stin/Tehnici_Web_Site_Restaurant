@@ -102,6 +102,7 @@ class AccesBD{
      * @param {QueryCallBack} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
      */
     select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){
+        //select({tabel:"produse", campuri:["nume", "pret", "descriere"], conditiiAnd:["pret>10", "calorii<700"]}, function(err, rez){
         let conditieWhere="";
         if(conditiiAnd.length>0)
             conditieWhere=`where ${conditiiAnd.join(" and ")}`; 
@@ -171,6 +172,7 @@ class AccesBD{
     // }
 
     update({tabel="",campuri={}, conditiiAnd=[]} = {}, callback, parametriQuery){
+        //update({tabel:"produse", campuri:{nume:"nume_nou", pret:17}})
         let campuriActualizate=[];
         for(let prop in campuri)
             campuriActualizate.push(`${prop}='${campuri[prop]}'`);

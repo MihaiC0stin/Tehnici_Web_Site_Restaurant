@@ -18,7 +18,7 @@ main{
 }
 
 .grid-produse .produs h3{
-    background-color: var(--culoare-roz-inchis);
+    background-color: var(--theme-main-color);
     text-align: center;
     margin-top: 0;
     padding-top: 0.5rem;
@@ -39,7 +39,7 @@ main{
 }
 .grid-produse .produs .info-prod{
     display:flex;
-    background-color: var(--cl-marcare);
+    background-color: var(--theme-main-color);
 }
 .grid-produse .produs .info-prod p{
     width:30%;
@@ -54,28 +54,78 @@ main{
 }
 
 .info-produse{
-    background-color: var(--cl-marcare);
+    background-color: var(--theme-main-color);
     padding:0.2rem;
     box-shadow: 0px 0px 0.5rem 0.15rem grey;
 }
 
 .produs{
     position: relative;
+    padding-bottom: 3rem;
 }
 .selecteaza-cos{
-    display: inline-block;
-    background-color: var(--culoare-mov);
+    display: block;
+    margin: 0 auto;
+    background-color: var(--theme-main-color-dark);
     position:absolute;
-    bottom:0.5rem;
-    right:0.5rem;
+    bottom: 1rem;
+    right: 1rem;
     border-radius: 0.5rem;
     text-align: center;
     padding:0.3rem;
     border:1px solid transparent;
+    width: fit-content;
 }
 
 .selecteaza-cos:hover{
-    background-color: var(--cl-marcare);
+    background-color: var(--theme-main-color);
     
-    border:1px solid  var(--culoare-mov);
+    border:1px solid  var(--theme-main-color-light);
+}
+
+
+
+
+
+.container-produs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 1rem;
+    overflow-x: auto;
+}
+
+.figura-produs {
+    width: 250px;
+    aspect-ratio: 640 / 427;
+    flex-shrink: 0;
+}
+
+.figura-produs img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.tabel-caracteristici {
+    border-collapse: collapse;
+    flex-grow: 1;
+    min-width: 0;
+    flex-shrink: 1;
+    margin-right: 1rem;
+    margin-bottom: 4rem;
+}
+
+.tabel-caracteristici td {
+    padding: 4px 8px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
+.mesaj-eroare {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
 }

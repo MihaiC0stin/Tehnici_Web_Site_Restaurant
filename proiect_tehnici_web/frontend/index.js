@@ -4,6 +4,16 @@ const fs = require('fs');
 const sharp = require('sharp');
 const sass = require('sass');
 const pg = require('pg');
+const AccesBD = require('./module_proprii/accesbd.js');
+
+AccesBD.getInstanta().select({tabel:"produse", campuri: ["*"]}, function(err, rez){
+    if (err){
+        // console.log(err);
+    }
+    else{
+        // console.log(rez);
+    }
+})
 
 const Client=pg.Client;
 
