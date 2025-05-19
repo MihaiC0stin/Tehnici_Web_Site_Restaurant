@@ -16,83 +16,133 @@
     <%- include("../fragmente/header.ejs") %>
     <main>
         <%- include("../fragmente/nav.ejs") %> 
-        <label> Nume: <input type="text" id="inp-nume"></label>
-        <br>
-        <p class="mesaj-eroare" id="mesaj-eroare-inp-nume"></p>
-        <label> Descriere:<br> <textarea  id="inp-descriere" rows="2" cols="30"></textarea></label>
-        <br>
-        <p class="mesaj-eroare" id="mesaj-eroare-inp-descriere"></p>
-        <label>Nume cu autocomplete:</label>
-        <input list="lista-nume" id="inp-nume-cu-autocomplete">
-        <datalist id="lista-nume">
-            <% for (let prod of locals.produse) { %>
-                <option value= "<%- prod.nume %>"></option>
-            <% } %>
-        </datalist>
-        <br>
-        <p class="mesaj-eroare" id="mesaj-eroare-inp-nume-cu-autocomplete"></p>
-        <label>Ingrediente excluse:</label>
-        <br>
-        <% 
-            //Colectăm ingrediente unice într-un Set
-            let ingredienteUnice = new Set();
-            for (let prod of locals.produse) {
-                if (Array.isArray(prod.ingrediente)) {
-                    for (let ingr of prod.ingrediente) {
-                        ingredienteUnice.add(ingr);  // adaugă doar dacă nu există deja
+        <div class="container">
+            <div class="row g-3">
+            <div class="col-md-6 col-lg-4">
+                <label for="inp-nume" class="form-label">Nume:</label>
+                <input type="text" class="form-control" id="inp-nume">
+                <p class="invalid-feedback d-block" id="mesaj-eroare-inp-nume"></p>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="form-floating">
+                <textarea class="form-control" id="inp-descriere" style="height: 100px"></textarea>
+                <label for="inp-descriere">Descriere</label>
+                </div>
+                <p class="invalid-feedback d-block" id="mesaj-eroare-inp-descriere"></p>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <label for="inp-nume-cu-autocomplete" class="form-label">Nume cu autocomplete:</label>
+                <input list="lista-nume" class="form-control" id="inp-nume-cu-autocomplete">
+                <datalist id="lista-nume">
+                <% for (let prod of locals.produse) { %>
+                    <option value="<%- prod.nume %>"></option>
+                <% } %>
+                </datalist>
+                <p class="invalid-feedback d-block" id="mesaj-eroare-inp-nume-cu-autocomplete"></p>
+            </div>
+            <% 
+                //Colectăm ingrediente unice într-un Set
+                let ingredienteUnice = new Set();
+                for (let prod of locals.produse) {
+                    if (Array.isArray(prod.ingrediente)) {
+                        for (let ingr of prod.ingrediente) {
+                            ingredienteUnice.add(ingr);  // adaugă doar dacă nu există deja
+                        }
                     }
                 }
-            }
-            let listaIngrediente = Array.from(ingredienteUnice);
-        %>
-        <select id="inp-ingrediente-excluse", multiple>
-            <% for (let ingrediente of listaIngrediente) { %>
-                <option value="<%- ingrediente %>"><%- ingrediente %></option>
-            <% } %>
-        </select>
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                <input id="i_rad1"  name="gr_rad" value="0:350" type="radio"/>
-            </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                <input id="i_rad2"  name="gr_rad" value="350:700" type="radio"/>
-            </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
-                <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio"/>
-            </label>
-            <p><label>Toate
-                <input id="i_rad4" checked name="gr_rad" value="toate" type="radio"/>
-            </label>
+                let listaIngrediente = Array.from(ingredienteUnice);
+            %>
+
+            <div class="col-12">
+                <label class="form-label">Ingrediente excluse:</label>
+                <select id="inp-ingrediente-excluse" class="form-select" multiple>
+                <% for (let ingrediente of listaIngrediente) { %>
+                    <option value="<%- ingrediente %>"><%- ingrediente %></option>
+                <% } %>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <label class="form-label">Calorii:</label>
+                <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad1" value="0:350">
+                <label class="btn btn-outline-primary" for="i_rad1" title="sub 350 de kcal">Dietetic</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad2" value="350:700">
+                <label class="btn btn-outline-primary" for="i_rad2" title="intre 350 si 700 de kcal">Mediu</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad3" value="700:1000">
+                <label class="btn btn-outline-primary" for="i_rad3" title="peste 700 de kcal">Ridicat</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad4" value="toate" checked>
+                <label class="btn btn-outline-primary" for="i_rad4">Toate</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inp-pret-minim" class="form-label">Pret minim:</label>
+                <div class="d-flex align-items-center">
+                <span id="valoarea-minima-pret-minim" class="me-2">0</span>
+                <input type="range" class="form-range" id="inp-pret-minim" value="0" min="0" max="70">
+                <span id="valoarea-maxima-pret-minim" class="mx-2">70</span>
+                <span id="infoRangeMinim">(0)</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inp-pret-maxim" class="form-label">Pret maxim:</label>
+                <div class="d-flex align-items-center">
+                <span id="valoarea-minima-pret-maxim" class="me-2">0</span>
+                <input type="range" class="form-range" id="inp-pret-maxim" value="70" min="0" max="70">
+                <span id="valoarea-maxima-pret-maxim" class="mx-2">70</span>
+                <span id="infoRangeMaxim">(70)</span>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <label for="inp-categorie" class="form-label">Selectează perioada mesei:</label>
+                <select id="inp-categorie" class="form-select">
+                <option value="oricand" selected>oricand</option>
+                <% for (let opt of locals.optiuni) { %>
+                    <option value="<%- opt.unnest %>"><%- opt.unnest %></option>
+                <% } %>
+                </select>
+            </div>
+
+            <div class="col-12 d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-primary" id="filtrare">
+                <i class="bi bi-funnel"></i> <span class="d-none d-sm-inline">Filtrează</span>
+                </button>
+                <button type="button" class="btn btn-secondary" id="resetare">
+                <i class="bi bi-arrow-clockwise"></i> <span class="d-none d-sm-inline">Resetează</span>
+                </button>
+                <button type="button" class="btn btn-outline-primary" id="sortCrescNume">
+                <i class="bi bi-sort-alpha-down"></i> <span class="d-none d-sm-inline">Sort cresc: Pret + Nume</span>
+                </button>
+                <button type="button" class="btn btn-outline-primary" id="sortDescrescNume">
+                <i class="bi bi-sort-alpha-up"></i> <span class="d-none d-sm-inline">Sort desc: Pret + Nume</span>
+                </button>
+                <button type="button" class="btn btn-outline-info" id="sortCrescNumeDescriere">
+                <i class="bi bi-sort-alpha-down"></i> <span class="d-none d-sm-inline">Sort cresc: Nume + Desc</span>
+                </button>
+                <button type="button" class="btn btn-outline-info" id="sortDescrescNumeDescriere">
+                <i class="bi bi-sort-alpha-up"></i> <span class="d-none d-sm-inline">Sort descresc: Nume + Desc</span>
+                </button>
+                <button type="button" class="btn btn-success" id="p-suma-selectat">
+                <i class="bi bi-calculator"></i> <span class="d-none d-sm-inline">Calculează suma</span>
+                </button>
+            </div>
+
+            <div class="col-12">
+                <p id="p-suma" class="mt-3">Apăsați Alt+"c" pentru suma prețurilor produselor afișate.</p>
+            </div>
+            </div>
         </div>
 
-
-        <label> Pret minim: <span id="valoarea-minima-pret-minim">0</span><input type="range" id="inp-pret-minim" value="0" min="0"  max="70"><span id="valoarea-maxima-pret-minim">70</span><span id="infoRangeMinim">(0)</span></label>
-        <label> Pret maxim: <span id="valoarea-minima-pret-maxim">0</span><input type="range" id="inp-pret-maxim" value="70" min="0"  max="70"> <span id="valoarea-maxima-pret-maxim">70</span><span id="infoRangeMaxim">(70)</span></label>
-        
-        <label>Select perioada masa zilei:
-            <select id="inp-categorie">
-                <option id="sel-toate" selected value="oricand">oricand</option>
-                <% for (let opt of locals.optiuni) { %>
-                    <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                <% } %>
-            </select>
-        </label>
-
-        <p>
-        <button id="filtrare">Filtreaza</button> 
-
-        <button id="resetare">Reseteaza</button><br/>
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-        <button id="sortCrescNumeDescriere">Sorteaza crescator dupa nume si lungimea descrierei</button>
-        <button id="sortDescrescNumeDescriere">Sorteaza descrescator dupa nume si lungimea descrierei</button>
-        
-        </p>
-        <button id="p-suma-selectat">Calculeaza suma preturilor produselor selectate. </button>
-        <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
   
         <section id="produse">
-
             <h2>Produse</h2>
             <div class="grid-produse">
                 <% for( let prod of locals.produse) { %>
@@ -154,12 +204,13 @@
                             </table>
                         </div>
 
-                        <label class="selecteaza-cos">
-                            Selectează:<br/>
-                            <input type="checkbox" class="select-cos" value="<%- prod.id %>" autocomplete="off">
-                        </label>
+                        <div class="text-center">
+                            <input type="checkbox" class="btn-check select-cos" id="prod-<%- prod.id %>" autocomplete="off" value="<%- prod.id %>">
+                            <label class="btn btn-outline-primary" for="prod-<%- prod.id %>">
+                                Selectează
+                            </label>
+                        </div>
                     </article>
-
                 <% }%>
             </div>
         </section>
