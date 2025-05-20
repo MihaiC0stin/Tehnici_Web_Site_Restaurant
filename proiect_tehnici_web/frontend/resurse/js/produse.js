@@ -122,7 +122,7 @@ window.onload = function() {
         }
     }
 
-    document.getElementById("inp-nume").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-nume").addEventListener("input", filtreazaProduse); 
     document.getElementById("inp-descriere").addEventListener("input", filtreazaProduse);
     document.getElementById("inp-nume-cu-autocomplete").addEventListener("input", filtreazaProduse);
     document.getElementById("inp-pret-minim").addEventListener("input", filtreazaProduse);
@@ -281,7 +281,7 @@ window.onload = function() {
         }
         if(!document.getElementById("suma_pret_produse_selectate")){
             let pRezultat = document.createElement("p");
-            pRezultat.innerHTML = `Suma preturilor produselor afisate este: ${sumaPreturi}`;
+            pRezultat.innerHTML = `Suma preturilor produselor afisate este: ${sumaPreturi}`; // ${} este un string literal
             pRezultat.id = "suma_pret_produse_selectate";
             let p = document.getElementById("p-suma-selectat");
             p.parentElement.insertBefore(pRezultat, p.nextElementSibling);
