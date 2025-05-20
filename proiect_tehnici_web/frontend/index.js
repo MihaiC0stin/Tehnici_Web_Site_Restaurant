@@ -69,11 +69,141 @@ obGlobal = {
     folderScss: path.join(__dirname, "resurse/scss"),
     folderCss: path.join(__dirname, "resurse/css"),
     folderBackup: path.join(__dirname, "resurse/backup"),
-    optiuniMeniu: null
+    optiuniMeniu: null,
+    lungimeNumeMin: null,
+    lungimeNumeMax: null,
+    pretMinim: null,
+    pretMaxim: null,
+    numeProduse: null,
+    caloriiMin: null,
+    caloriiMax: null,
+    contineAlcoolOptiuni: null,
+    numarProduseNonAlcool: null,
+    numarProduseAlcool: null,
+    lungimeDescriereMin: null,
+    lungimeDescriereMax: null,
+    optiuniMeseleZilei: null,
+    optiuniIngrediente: null
 }
 
 
-client.query("select * from unnest(enum_range(null::categorie_produse))", function(err, rezOptiuni){
+// PENTRU INPUT FILTRARE nume (TEXT)
+client.query("SELECT MIN(CHAR_LENGTH(nume)) AS lungime_min, MAX(CHAR_LENGTH(nume)) AS lungime_max FROM produse;", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rez.rows);
+            obGlobal.lungimeNumeMin=parseInt(rez.rows[0].lungime_min);
+            obGlobal.lungimeNumeMax=parseInt(rez.rows[0].lungime_max);
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE pret (RANGE)
+client.query("SELECT MIN(pret) AS pret_minim, MAX(pret) AS pret_maxim FROM produse", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rez.rows);
+            obGlobal.pretMinim=parseFloat(rez.rows[0].pret_minim);
+            obGlobal.pretMaxim=parseFloat(rez.rows[0].pret_maxim);
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE nume (DATALIST)
+client.query("SELECT DISTINCT nume FROM produse", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rez.rows);
+            obGlobal.numeProduse=rez.rows.map(rez => rez.nume);
+            // console.log(obGlobal.numeProduse);
+
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE calorii (RADIO)
+client.query("SELECT MIN(calorii) AS calorii_min, MAX(calorii) AS calorii_max FROM produse", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rez.rows);
+            obGlobal.caloriiMin=parseInt(rez.rows[0].calorii_min);
+            obGlobal.caloriiMax=parseInt(rez.rows[0].calorii_max);
+            // console.log(obGlobal.caloriiMin);
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE contine_alcool (CHECKBOX)
+client.query("SELECT contine_alcool, COUNT(*) AS nr FROM produse GROUP BY contine_alcool", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            obGlobal.contineAlcoolOptiuni=rez.rows.map(el => el.contine_alcool);
+            // console.log(obGlobal.contineAlcoolOptiuni);
+            obGlobal.numarProduseNonAlcool=parseInt(rez.rows[0].nr);
+            // console.log(obGlobal.numarProduseNonAlcool);
+            obGlobal.numarProduseAlcool=parseInt(rez.rows[1].nr);
+            // console.log(obGlobal.numarProduseAlcool);         
+
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE descriere (TEXTAREA)
+client.query("SELECT MIN(CHAR_LENGTH(descriere)) AS lungime_min, MAX(CHAR_LENGTH(descriere)) AS lungime_max FROM produse;", function(err, rez){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rez.rows);
+            obGlobal.lungimeDescriereMin=parseInt(rez.rows[0].lungime_min);
+            obGlobal.lungimeDescriereMax=parseInt(rez.rows[0].lungime_max);
+            // console.log(obGlobal.lungimeDescriereMin);
+        }
+    }
+})
+
+// PENTRU INPUT FILTRARE specifice_mesei_zilei (SELECT)
+client.query("select * from unnest(enum_range(null::specifice_mesei_zilei)) as optiune_masa_zi", function(err, rezOptiuni){
     if (err){
         // console.log(err);
         afisareEroare(res, 2);
@@ -84,10 +214,52 @@ client.query("select * from unnest(enum_range(null::categorie_produse))", functi
             }
         else{
             // console.log(rezOptiuni.rows);
-            obGlobal.optiuniMeniu=rezOptiuni.rows;
+            obGlobal.optiuniMeseleZilei=rezOptiuni.rows.map(rez => rez.optiune_masa_zi);
+            // console.log(obGlobal.optiuniMeseleZilei);
         }
     }
 })
+
+// PENTRU INPUT FILTRARE ingrediente (SELECT MULTIPLU)
+client.query("SELECT DISTINCT unnest(ingrediente) AS ingredient FROM produse ORDER BY ingredient", function(err, rezOptiuni){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }
+    else{
+        if (rezOptiuni.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rezOptiuni.rows);
+            obGlobal.optiuniIngrediente=rezOptiuni.rows.map(rez => rez.ingredient);
+            // console.log(obGlobal.optiuniIngrediente);
+
+        }
+    }
+})
+
+// PENTRU SELECT DIN MENIUL DE NAVIGARE
+client.query("select * from unnest(enum_range(null::categorie_produse)) as optiune_meniu", function(err, rezOptiuni){
+    if (err){
+        // console.log(err);
+        afisareEroare(res, 2);
+    }        
+    else{
+        if (rezOptiuni.rowCount==0){
+                afisareEroare(res, 404);
+            }
+        else{
+            // console.log(rezOptiuni.rows);
+            obGlobal.optiuniMeniu=rezOptiuni.rows.map(rez => rez.optiune_meniu);
+            // console.log(obGlobal.optiuniMeniu);
+        }
+    }
+})
+
+
+
+
 
 vect_foldere = ["temp", "backup", "temp1"]
 for(let folder of vect_foldere){
@@ -238,20 +410,32 @@ app.get("/meniu", function(req, res){
         conditieQuery=` where categorie_produs='${req.query.categorie}'`; //string in string
 
 
-    queryOptiuni="select * from unnest(enum_range(null::specifice_mesei_zilei))"
-    client.query(queryOptiuni, function(err, rezOptiuni){
 
-
-        queryProduse="select * from produse" + conditieQuery;
-        client.query(queryProduse, function(err, rez){
-            if (err){
-                console.log(err);
-                afisareEroare(res, 2);
-            }
-            else{
-                res.render("pagini/meniu", {produse: rez.rows, optiuni:rezOptiuni.rows})
-            }
-        })
+    queryProduse="select * from produse" + conditieQuery;
+    client.query(queryProduse, function(err, rez){
+        if (err){
+            console.log(err);
+            afisareEroare(res, 2);
+        }
+        else{
+            res.render("pagini/meniu", {
+                produse: rez.rows,
+                lungimeNumeMin: obGlobal.lungimeNumeMin,
+                lungimeNumeMax: obGlobal.lungimeNumeMax,
+                pretMinim: obGlobal.pretMinim,
+                pretMaxim: obGlobal.pretMaxim,
+                numeProduse: obGlobal.numeProduse,
+                caloriiMin: obGlobal.caloriiMin,
+                caloriiMax: obGlobal.caloriiMax,
+                contineAlcoolOptiuni: obGlobal.contineAlcoolOptiuni,
+                numarProduseNonAlcool: obGlobal.numarProduseNonAlcool,
+                numarProduseAlcool: obGlobal.numarProduseAlcool,
+                lungimeDescriereMin: obGlobal.lungimeDescriereMin,
+                lungimeDescriereMax: obGlobal.lungimeDescriereMax,
+                optiuniMeseleZilei: obGlobal.optiuniMeseleZilei,
+                optiuniIngrediente: obGlobal.optiuniIngrediente
+            });
+        }
     });
 })
 

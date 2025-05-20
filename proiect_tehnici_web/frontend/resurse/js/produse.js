@@ -11,6 +11,7 @@ window.onload = function() {
 
         let regexCaractereInterziseText = /[<>\"'\/\\&=;]/;
 
+
         if(regexCaractereInterziseText.test(validareInpNume)){
             document.getElementById("mesaj-eroare-inp-nume").textContent = "Numele contine caractere interzise.";
             return;
@@ -25,6 +26,12 @@ window.onload = function() {
             document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "Numele cu autocomplete contine caractere interzise.";
             return;
         }
+
+        // if(validareInpNume.length > lungimeNumeMax) {
+        //     document.getElementById("mesaj-eroare-inp-nume").textContent = `Numele este prea lung. Acesta poate avea maxim ${lungimeNumeMax} caractere.`;
+        //     return;
+        // }
+
 
         document.getElementById("mesaj-eroare-inp-nume").textContent = "";
         document.getElementById("mesaj-eroare-inp-descriere").textContent = "";
