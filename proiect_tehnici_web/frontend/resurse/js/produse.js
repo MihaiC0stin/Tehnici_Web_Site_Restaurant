@@ -79,6 +79,8 @@ window.onload = function() {
 
         let produse = document.getElementsByClassName("produs");
 
+        let counterProduseAfisate = 0;
+
         for (let prod of produse) {
 
             prod.style.display = "none";
@@ -118,9 +120,28 @@ window.onload = function() {
 
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8 && cond9) {
                 prod.style.display = "block";
+                counterProduseAfisate += 1;
             }    
         }
+
+        if (counterProduseAfisate == 0) {
+            if (!document.getElementById("mesaj-filtrare")) {
+                let p = document.createElement("p");
+                p.innerHTML = "Nu exista produse care sa corespunda filtrelor selectate.";
+                p.id = "mesaj-filtrare";
+                p.className = "mesaj-eroare";
+                let divProduse = document.getElementById("produse");
+                divProduse.parentElement.insertBefore(p, divProduse.nextElementSibling);
+            }
+        } else {
+            let p1 = document.getElementById("mesaj-filtrare");
+            if (p1) {
+                p1.remove();
+            }
+        }
     }
+
+
 
     document.getElementById("inp-nume").addEventListener("input", filtreazaProduse); 
     document.getElementById("inp-descriere").addEventListener("input", filtreazaProduse);
