@@ -3,24 +3,26 @@ window.onload = function() {
     let vectorProduseNesortate = Array.from(produseNesortate);         // Array.from() - transforma un HTMLCollection intr-un array
     btn = document.getElementById("filtrare");
 
-    btn.onclick = function() {
+    function filtreazaProduse() {
 
         let validareInpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
         let validareInpDescriere = document.getElementById("inp-descriere").value.trim().toLowerCase();
         let validareInpNumeCuAutocomplete = document.getElementById("inp-nume-cu-autocomplete").value.trim().toLowerCase();
 
-        if(validareInpNume.includes(">")){
-            document.getElementById("mesaj-eroare-inp-nume").textContent = "Numele contine caracter interzis.";
+        let regexCaractereInterziseText = /[<>\"'\/\\&=;]/;
+
+        if(regexCaractereInterziseText.test(validareInpNume)){
+            document.getElementById("mesaj-eroare-inp-nume").textContent = "Numele contine caractere interzise.";
             return;
         }
 
-        if(validareInpDescriere.includes(">")){
-            document.getElementById("mesaj-eroare-inp-descriere").textContent = "Descrierea contine caracter interzis.";
+        if(regexCaractereInterziseText.test(validareInpDescriere)){
+            document.getElementById("mesaj-eroare-inp-descriere").textContent = "Descrierea contine caractere interzise.";
             return;
         }
 
-        if(validareInpNumeCuAutocomplete.includes(">")){
-            document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "Numele cu autocomplete contine caracter interzis.";
+        if(regexCaractereInterziseText.test(validareInpNumeCuAutocomplete)){
+            document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "Numele cu autocomplete contine caractere interzise.";
             return;
         }
 
@@ -73,6 +75,8 @@ window.onload = function() {
 
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
 
+        let inpAlcool = document.getElementById("inp-alcool").checked;
+
         let produse = document.getElementsByClassName("produs");
 
         for (let prod of produse) {
@@ -107,19 +111,39 @@ window.onload = function() {
 
             let cond8 = (inpCategorie == "oricand" || inpCategorie == categorie);
 
+            let alcool = prod.getElementsByClassName("val-contine-alcool")[0].innerHTML.trim().toLowerCase();
 
-            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8) {
+            let cond9 = (inpAlcool == true || (!inpAlcool && alcool == "nu"));
+
+
+            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8 && cond9) {
                 prod.style.display = "block";
             }    
         }
     }
 
+    document.getElementById("inp-nume").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-descriere").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-nume-cu-autocomplete").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-pret-minim").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-pret-maxim").addEventListener("input", filtreazaProduse);
+    document.getElementById("inp-categorie").addEventListener("change", filtreazaProduse);
+    document.getElementById("inp-alcool").addEventListener("change", filtreazaProduse);
+    document.getElementById("inp-ingrediente-excluse").addEventListener("change", filtreazaProduse);
 
-    document.getElementById("inp-pret-minim").onchange = function() {
+    Array.from(document.getElementsByName("gr_rad")).forEach(rad => {
+        rad.addEventListener("change", filtreazaProduse);
+    });
+
+
+    document.getElementById("filtrare").onclick = filtreazaProduse
+
+
+    document.getElementById("inp-pret-minim").oninput = function() {
         document.getElementById("infoRangeMinim").innerHTML = `(${this.value})`; //string literals
     }
 
-    document.getElementById("inp-pret-maxim").onchange = function() {
+    document.getElementById("inp-pret-maxim").oninput = function() {
         document.getElementById("infoRangeMaxim").innerHTML = `(${this.value})`; //string literals
     }
 
@@ -134,6 +158,11 @@ window.onload = function() {
         document.getElementById("inp-pret-maxim").value = 70;
         document.getElementById("infoRangeMaxim").innerHTML = "(70)";
         document.getElementById("inp-categorie").value = "oricand";
+        document.getElementById("inp-alcool").checked = true;
+
+        document.getElementById("mesaj-eroare-inp-nume").textContent = "";
+        document.getElementById("mesaj-eroare-inp-descriere").textContent = "";
+        document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "";
 
         let vectRadio = document.getElementsByName("gr_rad");
         for (let rad of vectRadio) {

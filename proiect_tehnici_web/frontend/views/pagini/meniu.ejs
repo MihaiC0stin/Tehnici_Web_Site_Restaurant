@@ -17,23 +17,23 @@
     <main>
         <%- include("../fragmente/nav.ejs") %> 
         <div class="container">
-            <div class="row g-3">
-            <div class="col-md-6 col-lg-4">
-                <label for="inp-nume" class="form-label">Nume:</label>
-                <input type="text" class="form-control" id="inp-nume">
+            <div class="row g-3" style="margin-top: 1rem;">
+            <div class="col-md-6 col-lg-4 text-center">
+                <label for="inp-nume" class="form-label">Nume</label>
+                <input type="text" class="form-control" id="inp-nume" placeholder="Ex: <%= locals.produse[0].nume %>" title="Se pot cauta produse dupa nume si cu [inceput] * [sfarsit]">
                 <p class="invalid-feedback d-block" id="mesaj-eroare-inp-nume"></p>
             </div>
 
             <div class="col-md-6 col-lg-4">
                 <div class="form-floating">
-                <textarea class="form-control" id="inp-descriere" style="height: 100px"></textarea>
-                <label for="inp-descriere">Descriere</label>
+                    <textarea class="form-control" id="inp-descriere"  placeholder="ex: Supă fină cu smântână" title="Ex: <%= locals.produse[0].descriere %>" style="height: 100px"></textarea>
+                    <label for="inp-descriere">Descriere</label>
                 </div>
                 <p class="invalid-feedback d-block" id="mesaj-eroare-inp-descriere"></p>
             </div>
 
-            <div class="col-md-6 col-lg-4">
-                <label for="inp-nume-cu-autocomplete" class="form-label">Nume cu autocomplete:</label>
+            <div class="col-md-6 col-lg-4 text-center">
+                <label for="inp-nume-cu-autocomplete" class="form-label">Nume cu autocomplete</label>
                 <input list="lista-nume" class="form-control" id="inp-nume-cu-autocomplete">
                 <datalist id="lista-nume">
                 <% for (let prod of locals.produse) { %>
@@ -52,57 +52,25 @@
                         }
                     }
                 }
-                let listaIngrediente = Array.from(ingredienteUnice);
+                let listaIngrediente = Array.from(ingredienteUnice).sort((a, b) => a.localeCompare(b));
             %>
 
-            <div class="col-12">
-                <label class="form-label">Ingrediente excluse:</label>
-                <select id="inp-ingrediente-excluse" class="form-select" multiple>
-                <% for (let ingrediente of listaIngrediente) { %>
-                    <option value="<%- ingrediente %>"><%- ingrediente %></option>
-                <% } %>
+            <div class="col-md-6 col-lg-4 text-center">
+                <label for="inp-ingrediente-excluse" class="form-label">Ingrediente excluse</label>
+                <select id="inp-ingrediente-excluse" class="form-select" multiple
+                    aria-describedby="help-ingrediente-excluse"
+                    style="height: 10rem; overflow-y: auto; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                    <% for (let ingrediente of listaIngrediente) { %>
+                        <option value="<%- ingrediente %>"><%- ingrediente %></option>
+                    <% } %>
                 </select>
-            </div>
-
-            <div class="col-12">
-                <label class="form-label">Calorii:</label>
-                <div class="btn-group w-100" role="group">
-                <input type="radio" class="btn-check" name="gr_rad" id="i_rad1" value="0:350">
-                <label class="btn btn-outline-primary" for="i_rad1" title="sub 350 de kcal">Dietetic</label>
-
-                <input type="radio" class="btn-check" name="gr_rad" id="i_rad2" value="350:700">
-                <label class="btn btn-outline-primary" for="i_rad2" title="intre 350 si 700 de kcal">Mediu</label>
-
-                <input type="radio" class="btn-check" name="gr_rad" id="i_rad3" value="700:1000">
-                <label class="btn btn-outline-primary" for="i_rad3" title="peste 700 de kcal">Ridicat</label>
-
-                <input type="radio" class="btn-check" name="gr_rad" id="i_rad4" value="toate" checked>
-                <label class="btn btn-outline-primary" for="i_rad4">Toate</label>
+                <div id="help-ingrediente-excluse" class="form-text text-secondary">
+                    Ține Ctrl pentru a selecta/deselecta mai multe.
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <label for="inp-pret-minim" class="form-label">Pret minim:</label>
-                <div class="d-flex align-items-center">
-                <span id="valoarea-minima-pret-minim" class="me-2">0</span>
-                <input type="range" class="form-range" id="inp-pret-minim" value="0" min="0" max="70">
-                <span id="valoarea-maxima-pret-minim" class="mx-2">70</span>
-                <span id="infoRangeMinim">(0)</span>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <label for="inp-pret-maxim" class="form-label">Pret maxim:</label>
-                <div class="d-flex align-items-center">
-                <span id="valoarea-minima-pret-maxim" class="me-2">0</span>
-                <input type="range" class="form-range" id="inp-pret-maxim" value="70" min="0" max="70">
-                <span id="valoarea-maxima-pret-maxim" class="mx-2">70</span>
-                <span id="infoRangeMaxim">(70)</span>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4">
-                <label for="inp-categorie" class="form-label">Selectează perioada mesei:</label>
+            <div class="col-md-6 col-lg-4 text-center">
+                <label for="inp-categorie" class="form-label">Selectează perioada mesei</label>
                 <select id="inp-categorie" class="form-select">
                 <option value="oricand" selected>oricand</option>
                 <% for (let opt of locals.optiuni) { %>
@@ -110,6 +78,78 @@
                 <% } %>
                 </select>
             </div>
+
+            <div class="col-md-4 col-lg-4 d-flex justify-content-center align-items-center">
+                <input type="checkbox" class="btn-check" id="inp-alcool" autocomplete="off" checked>
+                <label class="btn btn-outline-danger btn-lg rounded-pill" for="inp-alcool" title="Afișează produse ce contin alcool">
+                    <i class="bi bi-cup-straw"></i> 
+                    <span class="d-none d-sm-inline">Cu alcool</span>
+                </label>
+            </div>
+
+
+            <%
+                let caloriiMin = Infinity, caloriiMax = -Infinity;
+                for (let prod of locals.produse) {
+                    let calorii = parseInt(prod.calorii);
+                    if (calorii < caloriiMin) caloriiMin = calorii;
+                    if (calorii > caloriiMax) caloriiMax = calorii;
+                }
+
+                // Împărțim domeniul în 3 intervale egale
+                let dif = caloriiMax - caloriiMin;
+                let prag1 = Math.floor(caloriiMin + dif / 3);
+                let prag2 = Math.floor(caloriiMin + 2 * dif / 3);
+            %>
+
+            <div class="col-12">
+                <label class="form-label">Calorii:</label>
+                <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad1" value="<%= caloriiMin %>:<%= prag1 %>">
+                <label class="btn btn-outline-primary" for="i_rad1" title="sub <%= prag1 %> de kcal">Dietetic</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad2" value="<%= prag1 %>:<%= prag2 %>">
+                <label class="btn btn-outline-primary" for="i_rad2" title="intre <%= prag1 %> si <%= prag2 %> de kcal">Mediu</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad3" value="<%= prag2 %>:<%= caloriiMax %>">
+                <label class="btn btn-outline-primary" for="i_rad3" title="peste <%= prag2 %> de kcal">Ridicat</label>
+
+                <input type="radio" class="btn-check" name="gr_rad" id="i_rad4" value="toate" checked>
+                <label class="btn btn-outline-primary" for="i_rad4">Toate</label>
+                </div>
+            </div>
+
+            <%
+                let pretMin = Infinity;
+                let pretMax = -Infinity;
+                for (let prod of locals.produse) {
+                    let pret = parseFloat(prod.pret); // ✅ conversie sigură
+                    if (pret < pretMin) pretMin = pret;
+                    if (pret > pretMax) pretMax = pret;
+                }
+            %>
+
+            <div class="col-md-6">
+                <label for="inp-pret-minim" class="form-label">Pret minim:</label>
+                <div class="d-flex align-items-center">
+                <span id="valoarea-minima-pret-minim" class="me-2"><%= pretMin %></span>
+                <input type="range" class="form-range" id="inp-pret-minim" value="<%= pretMin %>" min="<%= pretMin %>" max="<%= pretMax %>">
+                <span id="valoarea-maxima-pret-minim" class="mx-2"><%= pretMax %></span>
+                <span id="infoRangeMinim">(<%= pretMin %>)</span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="inp-pret-maxim" class="form-label">Pret maxim:</label>
+                <div class="d-flex align-items-center">
+                <span id="valoarea-minima-pret-maxim" class="me-2"><%= pretMin %></span>
+                <input type="range" class="form-range" id="inp-pret-maxim" value="<%= pretMax %>" min="<%= pretMin %>" max="<%= pretMax %>">
+                <span id="valoarea-maxima-pret-maxim" class="mx-2"><%= pretMax %></span>
+                <span id="infoRangeMaxim">(<%= pretMax %>)</span>
+                </div>
+            </div>
+
+  
 
             <div class="col-12 d-flex flex-wrap gap-2">
                 <button type="button" class="btn btn-primary" id="filtrare">
