@@ -3,11 +3,29 @@ window.onload = function() {
     let vectorProduseNesortate = Array.from(produseNesortate);         // Array.from() - transforma un HTMLCollection intr-un array
     btn = document.getElementById("filtrare");
 
+
+    function InpAlcoolSchimbareTitluMesaj() {
+        switchButtonInpAlcool = document.getElementById("inp-alcool").checked;
+        etichetaButtonInpAlcool = document.getElementById("button-inp-alcool");
+        mesajApasareButtonInpAlcool = document.getElementById("mesaj-apasare-button-inp-alcool");
+        numarProduseAlcool = document.getElementById("config").dataset.numarProduseAlcool;
+        
+        if(switchButtonInpAlcool) {
+            etichetaButtonInpAlcool.title = "Ascunde produsele care contin alcool";
+            mesajApasareButtonInpAlcool.textContent = `+ ${numarProduseAlcool} produse valabile pentru filtrare`;
+        }
+        else {
+            etichetaButtonInpAlcool.title = "Afiseaza produsele care contin alcool";
+            mesajApasareButtonInpAlcool.textContent = `- ${numarProduseAlcool} produse valabile pentru filtrare`;
+        }
+    }
+
     function filtreazaProduse() {
 
         let validareInpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
         let validareInpDescriere = document.getElementById("inp-descriere").value.trim().toLowerCase();
         let validareInpNumeCuAutocomplete = document.getElementById("inp-nume-cu-autocomplete").value.trim().toLowerCase();
+
 
         let regexCaractereInterziseText = /[<>\"'\/\\&=;]/;
 
@@ -27,21 +45,41 @@ window.onload = function() {
             return;
         }
 
-        // if(validareInpNume.length > lungimeNumeMax) {
-        //     document.getElementById("mesaj-eroare-inp-nume").textContent = `Numele este prea lung. Acesta poate avea maxim ${lungimeNumeMax} caractere.`;
-        //     return;
-        // }
+        lungimeNumeMax = document.getElementById("config").dataset.lungimeNumeMax;
+        if(validareInpNume.length > lungimeNumeMax) {
+            document.getElementById("mesaj-eroare-inp-nume").textContent = `Numele este prea lung. Acesta poate avea maxim ${lungimeNumeMax} caractere.`;
+            return;
+        }
+
+        lungimeDescriereMax = document.getElementById("config").dataset.lungimeDescriereMax;
+        if(validareInpDescriere.length > lungimeDescriereMax) {
+            document.getElementById("mesaj-eroare-inp-descriere").textContent = `Descrierea este prea lunga. Aceasta poate avea maxim ${lungimeDescriereMax} caractere.`;
+            return;
+        }
+
+        validareInpPretMinim = parseFloat(document.getElementById("inp-pret-minim").value);
+        validareInpPretMaxim = parseFloat(document.getElementById("inp-pret-maxim").value);
+
+        if(validareInpPretMinim > validareInpPretMaxim) {
+            document.getElementById("mesaj-eroare-inp-pret").textContent = "Pretul minim nu poate fi mai mare decat pretul maxim.";
+            return;
+        }
+
+
 
 
         document.getElementById("mesaj-eroare-inp-nume").textContent = "";
         document.getElementById("mesaj-eroare-inp-descriere").textContent = "";
         document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "";
+        document.getElementById("mesaj-eroare-inp-pret").textContent = "";
+        
 
             
 
         let inpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
         let startInpNume ="";
         let endInpNume = "";
+
         if(inpNume.includes("*")) 
             {
                 [startInpNume, endInpNume] = inpNume.split("*");
@@ -76,9 +114,9 @@ window.onload = function() {
             }
         }
 
-        let inpPretMinim = document.getElementById("inp-pret-minim").value;
+        let inpPretMinim = parseFloat(document.getElementById("inp-pret-minim").value);
 
-        let inpPretMaxim = document.getElementById("inp-pret-maxim").value;
+        let inpPretMaxim = parseFloat(document.getElementById("inp-pret-maxim").value);
 
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
 
@@ -131,6 +169,7 @@ window.onload = function() {
             }    
         }
 
+ 
         if (counterProduseAfisate == 0) {
             if (!document.getElementById("mesaj-filtrare")) {
                 let p = document.createElement("p");
@@ -157,6 +196,7 @@ window.onload = function() {
     document.getElementById("inp-pret-maxim").addEventListener("input", filtreazaProduse);
     document.getElementById("inp-categorie").addEventListener("change", filtreazaProduse);
     document.getElementById("inp-alcool").addEventListener("change", filtreazaProduse);
+    document.getElementById("inp-alcool").addEventListener("change", InpAlcoolSchimbareTitluMesaj);
     document.getElementById("inp-ingrediente-excluse").addEventListener("change", filtreazaProduse);
 
     Array.from(document.getElementsByName("gr_rad")).forEach(rad => {
@@ -191,6 +231,8 @@ window.onload = function() {
         document.getElementById("mesaj-eroare-inp-nume").textContent = "";
         document.getElementById("mesaj-eroare-inp-descriere").textContent = "";
         document.getElementById("mesaj-eroare-inp-nume-cu-autocomplete").textContent = "";
+        document.getElementById("mesaj-eroare-inp-pret").textContent = "";
+        document.getElementById("mesaj-apasare-button-inp-alcool").textContent = "";
 
         let vectRadio = document.getElementsByName("gr_rad");
         for (let rad of vectRadio) {

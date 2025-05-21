@@ -80,3 +80,19 @@ main{
     font-weight: bold;
     margin-top: 1rem;
 }
+
+.mesaj-succes {
+    color: green;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+#mesaj-apasare-button-inp-alcool {
+  position: absolute;
+  bottom: 0;
+}
+
+#mesaj-eroare-inp-pret {
+  position: relative;
+  text-align: center;
+}

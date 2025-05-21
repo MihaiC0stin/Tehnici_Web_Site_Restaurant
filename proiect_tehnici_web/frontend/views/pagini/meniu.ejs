@@ -9,9 +9,12 @@
 
     <%- include("../fragmente/head.ejs") %>
     <link rel="stylesheet" href="/resurse/css/produse.css">
-    <!-- <script>
-        let lungimeNumeMax = <%= // lungimeNumeMax %>;
-    </script> -->
+    
+    <div id="config"
+        data-lungime-nume-max="<%= locals.lungimeNumeMax %>"
+        data-lungime-descriere-max="<%=locals.lungimeDescriereMax %>"
+        data-numar-produse-alcool="<%= locals.numarProduseAlcool %>"
+    ></div>
     <script type="text/javascript" src=/resurse/js/produse.js></script>
 
 </head>
@@ -69,13 +72,16 @@
                 </select>
             </div>
 
-            <div class="col-md-4 col-lg-4 d-flex justify-content-center align-items-center">
+            <div class="col-md-4 col-lg-4 d-flex justify-content-center align-items-center position-relative">
                 <input type="checkbox" class="btn-check" id="inp-alcool" autocomplete="off" checked>
-                <label class="btn btn-outline-danger btn-lg rounded-pill" for="inp-alcool" title="Afișează produse ce contin alcool">
+                <label class="btn btn-outline-danger btn-lg rounded-pill" id="button-inp-alcool" for="inp-alcool" title="Ascunde produsele care contin alcool, <%=locals.numarProduseAlcool%> produse">
                     <i class="bi bi-cup-straw"></i> 
                     <span class="d-none d-sm-inline">Cu alcool</span>
                 </label>
+                <p class="mesaj-succes" id="mesaj-apasare-button-inp-alcool"></p>
             </div>
+
+
 
 
             <%
@@ -121,6 +127,8 @@
                 <span id="infoRangeMaxim">(<%= locals.pretMaxim %>)</span>
                 </div>
             </div>
+
+            <p class="mesaj-eroare" id="mesaj-eroare-inp-pret"></p>
 
   
 
