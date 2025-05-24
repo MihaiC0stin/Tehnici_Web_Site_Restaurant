@@ -338,10 +338,12 @@ window.onload = function() {
     }
 
     document.getElementById("p-suma-selectat").onclick = function() {
-        let produseSelectate = Array.from(document.getElementsByClassName("select-cos")) // facem din HTMLCollection un array, cu elemente HTMLInputElement
+        let produseSelectate = Array.from(document.getElementsByClassName("select-cos")) // facem din HTMLCollection un array,
+        //  cu elemente HTMLInputElement
         .filter(cb => cb.checked) // filtram dupa propietatea checked, cb ia fiecare element din array
-        .map(cb => cb.parentElement.parentElement); // mapam fiecare element din array la parintele parintelui -> selecteaza-cos -> produs,
-        //  map transforma fiecare element din array in altul
+        .map(cb => cb.parentElement.parentElement); // mapam fiecare element din array
+        //  la parintele parintelui -> selecteaza-cos -> produs,
+        //  map face un array nou cu elemente pe care se aplica functia 
         console.log(produseSelectate);
         let sumaPreturi = 0;
         for (let prod of produseSelectate) {

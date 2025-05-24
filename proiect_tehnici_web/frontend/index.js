@@ -439,7 +439,8 @@ app.get("/meniu", function(req, res){
     });
 })
 
-app.get("/produs/:id", function(req, res){
+app.get("/produs/:id", function(req, res){ //:id este parametru de ruta, get accepta calea dinamica trimisa
+//  de client /produs/ceva
     client.query(`select * from produse where id=${req.params.id}`, function(err, rez){
         if (err){
             console.log(err);
@@ -450,6 +451,8 @@ app.get("/produs/:id", function(req, res){
                 afisareEroare(res, 404);
             }
             else{
+                // console.log(rez.rows[0]);
+                // console.log(rez.rows);
                 res.render("pagini/produs", {prod: rez.rows[0]})
             }
         }

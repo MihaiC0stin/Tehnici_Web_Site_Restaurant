@@ -1,7 +1,7 @@
 DROP TYPE IF EXISTS categ_prajitura;
 DROP TYPE IF EXISTS tipuri_produse;
 
-CREATE TYPE categ_prajitura AS ENUM( 'comanda speciala', 'aniversara', 'editie limitata', 'pentru copii', 'dietetica','comuna');
+CREATE TYPE categ_prajitura AS ENUM('comanda speciala', 'aniversara', 'editie limitata', 'pentru copii', 'dietetica','comuna');
 CREATE TYPE tipuri_produse AS ENUM('cofetarie', 'patiserie', 'gelaterie');
 
 
