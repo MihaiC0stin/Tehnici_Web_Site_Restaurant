@@ -14,6 +14,7 @@
         data-lungime-nume-max="<%= locals.lungimeNumeMax %>"
         data-lungime-descriere-max="<%=locals.lungimeDescriereMax %>"
         data-numar-produse-alcool="<%= locals.numarProduseAlcool %>"
+        data-produse = '<%- JSON.stringify(locals.produse) %>'
     ></div>
     <script type="text/javascript" src=/resurse/js/produse.js></script>
 
@@ -65,9 +66,8 @@
             <div class="col-md-6 col-lg-4 text-center">
                 <label for="inp-categorie" class="form-label">Selectează perioada mesei</label>
                 <select id="inp-categorie" class="form-select">
-                <option value="oricand" selected>oricand</option>
                 <% for (let optiune of locals.optiuniMeseleZilei) { %>
-                    <option value="<%- optiune %>"><%- optiune %></option>
+                    <option value="<%- optiune %>" <%= optiune == "oricand" ? "selected" : ""%>><%- optiune %></option>
                 <% } %>
                 </select>
             </div>
@@ -233,6 +233,18 @@
                     </article>
                 <% }%>
             </div>
+            <div id="carouselProduse" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators"></div>
+                <div class="carousel-inner"></div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduse" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselProduse" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+            <script type="text/javascript" src=/resurse/js/carousel.js></script>
         </section>
     </main>
     <%- include("../fragmente/footer.ejs") %>

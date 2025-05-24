@@ -703,4 +703,54 @@ text-shadow: 2px 2px 4px black;
     --text-color: var(--theme-main-color-lighter);
     --border-color: var(--theme-main-color-lighter);
   }
+
+
+  #banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 25vw;
+    height: 25vw;
+    background-color: #333; /* culoare inițială */
+    color: white;
+    padding: 1em;
+    font-size: calc(0.8vw + 0.8vh);
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom left;
+    z-index: 9999;
+    display: none; /* ascuns implicit */
+    border-radius: 0.5em;
+    transition: all 0.5s ease;
+}
+
+#banner.animat {
+    animation: animBanner 5s forwards;
+}
+
+@keyframes animBanner {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+        background-color: #333;
+    }
+    100% {
+        opacity: 0.75;
+        transform: scale(1);
+        background-color: #555; /* sau altă culoare finală */
+    }
+}
+
+@media (max-width: 768px) {
+    #banner {
+        all: unset;
+        position: static;
+        display: block;
+        padding: 1em;
+        background: #444;
+        color: white;
+        text-align: center;
+        font-size: 1rem;
+    }
+}
   

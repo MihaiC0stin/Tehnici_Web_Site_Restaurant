@@ -4,15 +4,15 @@ ATENTIE!
 inca nu am implementat protectia contra SQL injection
 */
 
-const {Client, Pool}=require("pg");
+const {Client, Pool}=require("pg"); //pg este un client pentru baza de date PostgreSQL
 
-
-class AccesBD{
+// AccesBD este o clasa care implementeaza un model de design Singleton pentru a avea o singura instanta a conexiunii la baza de date
+class AccesBD{ // proprietatile statice tin de clasa 
     static #instanta=null;
     static #initializat=false;
 
-    constructor() {
-        if(AccesBD.#instanta){
+    constructor() { // constructorul este privat pentru a preveni instantierea directa a clasei, creaza un obiect de tip Client pentru a se conecta la baza de date
+        if(AccesBD.#instanta){ // daca exista deja o instanta, aruncam eroare, exemplu de apelare a proprietatii statice
             throw new Error("Deja a fost instantiat");
         }
         else if(!AccesBD.#initializat){
@@ -21,16 +21,12 @@ class AccesBD{
     }
 
     initLocal(){
-        this.client= new Client({database:"tehniciweb",
+        this.client= new Client({
+            database:"tehniciweb",
             user:"mihai", 
             password:"mihai", 
             host:"localhost", 
             port:5432});
-        // this.client2= new Pool({database:"laborator",
-        //         user:"irina", 
-        //         password:"irina", 
-        //         host:"localhost", 
-        //         port:5432});
         this.client.connect();
     }
 
@@ -53,7 +49,7 @@ class AccesBD{
      * @param {ObiectConexiune} init - un obiect cu datele pentru query
      * @returns {AccesBD}
      */
-    static getInstanta({init="local"}={}){
+    static getInstanta({init="local"}={}){ //metoda statica care returneaza instanta unica a clasei, parametrul init are valoarea "local" in mod implicit, util pentru getInstanta()
         console.log(this);//this-ul e clasa nu instanta pt ca metoda statica
         if(!this.#instanta){
             this.#initializat=true;
@@ -101,13 +97,18 @@ class AccesBD{
      * @param {ObiectQuerySelect} obj - un obiect cu datele pentru query
      * @param {QueryCallBack} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
      */
-    select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){
+
+
+
+
+    select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){ // tabelul, coloanele si conditiile
         //select({tabel:"produse", campuri:["nume", "pret", "descriere"], conditiiAnd:["pret>10", "calorii<700"]}, function(err, rez){
         let conditieWhere="";
         if(conditiiAnd.length>0)
-            conditieWhere=`where ${conditiiAnd.join(" and ")}`; 
+            // "where pret > 10 and calorii < 700"
+            conditieWhere=`where ${conditiiAnd.join(" and ")}`; // join() uneste elementele unui array cu un separator, in cazul nostru " and "
         let comanda=`select ${campuri.join(",")} from ${tabel} ${conditieWhere}`;
-        console.error(comanda);
+        console.error(comanda); // afisam comanda in consola pentru debugging
         /*
         comanda=`select id, camp1, camp2 from tabel where camp1=$1 and camp2=$2;
         this.client.query(comanda,[val1, val2],callback)
@@ -174,8 +175,8 @@ class AccesBD{
     update({tabel="",campuri={}, conditiiAnd=[]} = {}, callback, parametriQuery){
         //update({tabel:"produse", campuri:{nume:"nume_nou", pret:17}})
         let campuriActualizate=[];
-        for(let prop in campuri)
-            campuriActualizate.push(`${prop}='${campuri[prop]}'`);
+        for(let prop in campuri) //parcurgem proprietatile obiectului campuri "nume", "pret" etc.
+            campuriActualizate.push(`${prop}='${campuri[prop]}'`); // adaugam in array-ul campuriActualizate numele proprietatii si valoarea acesteia
         let conditieWhere="";
         if(conditiiAnd.length>0)
             conditieWhere=`where ${conditiiAnd.join(" and ")}`;

@@ -14,6 +14,9 @@
     <%- include("../fragmente/header.ejs") %>
     <main>
         <%- include("../fragmente/nav.ejs") %>
+        <% if (ultimaPagina) { %>
+            <p class="text-muted">Ultima pagină accesată: <%= ultimaPagina %></p>
+        <% } %>
         <div id = "grid-pagina-acasa">
             <section id="despre-noi">
                 <h2>Despre noi</h2>

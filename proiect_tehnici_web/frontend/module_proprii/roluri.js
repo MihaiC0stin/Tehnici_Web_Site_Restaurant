@@ -11,7 +11,7 @@ class Rol{
 
     areDreptul(drept){ //drept trebuie sa fie tot Symbol
         console.log("in metoda rol!!!!")
-        return this.constructor.drepturi.includes(drept); //pentru ca e admin
+        return this.constructor.drepturi.includes(drept); //verificam daca dreptul este in array-ul de drepturi al rolului
     }
 }
 
@@ -29,13 +29,13 @@ class RolAdmin extends Rol{
 
 class RolModerator extends Rol{
     
-    static get tip() {return "moderator"}
-    static get drepturi() { return [
+    static get tip() {return "moderator"} //returneaza stringul "moderator"
+    static get drepturi() { return [ // returneaza un array de cu drepturile de moderator
         Drepturi.vizualizareUtilizatori,
         Drepturi.stergereUtilizatori
     ] }
     constructor (){
-        super()
+        super() // apelam constructorul clasei de baza Rol
     }
 }
 
@@ -49,12 +49,26 @@ class RolClient extends Rol{
     }
 }
 
+class AdministratorProduse extends Rol{
+    static get tip() {return "administratorProduse"}
+    static get drepturi() { return [
+        Drepturi.modificareProduse,
+        Drepturi.stergereProduse,
+        Drepturi.creareProduse
+    ] }
+    constructor (){
+        super()
+    }
+}
+
+
 class RolFactory{
     static creeazaRol(tip) {
         switch(tip){
             case RolAdmin.tip : return new RolAdmin();
             case RolModerator.tip : return new RolModerator();
             case RolClient.tip : return new RolClient();
+            case AdministratorProduse.tip : return new AdministratorProduse();
         }
     }
 }
