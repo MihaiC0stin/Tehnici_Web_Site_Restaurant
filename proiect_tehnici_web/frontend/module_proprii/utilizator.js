@@ -31,7 +31,7 @@ class Utilizator{
             this[prop]=arguments[0][prop]
         }
         if(this.rol)
-            this.rol=this.rol.cod? RolFactory.creeazaRol(this.rol.cod):  RolFactory.creeazaRol(this.rol);
+            this.rol=this.rol.cod ? RolFactory.creeazaRol(this.rol.cod) : RolFactory.creeazaRol(this.rol);
         console.log(this.rol);
 
         this.#eroare="";
@@ -163,5 +163,78 @@ class Utilizator{
     areDreptul(drept){
         return this.rol.areDreptul(drept);
     }
+
+    modifica(obNou) {
+        if (!this.id) throw new Error("Utilizatorul nu există (id lipsă)");
+
+        const campuri = {};
+        for (let prop in obNou) {
+            if (prop !== "id" && obNou[prop] !== undefined) {
+                campuri[prop] = obNou[prop];
+                this[prop] = obNou[prop]; // actualizează și în obiectul curent
+            }
+        }
+
+        AccesBD.getInstanta(Utilizator.tipConexiune).update({
+            tabel: Utilizator.tabel,
+            campuri: campuri,
+            conditiiAnd: [`id=${this.id}`]
+        }, (err, rez) => {
+            if (err) throw err;
+        });
+    }
+
+    sterge() {
+        if (!this.id) throw new Error("Utilizatorul nu există (id lipsă)");
+
+        AccesBD.getInstanta(Utilizator.tipConexiune).delete({
+            tabel: Utilizator.tabel,
+            conditiiAnd: [`id=${this.id}`]
+        }, (err, rez) => {
+            if (err) throw err;
+        });
+    }
+
+    static cauta(obParam, callback) {
+        const conditii = [];
+        for (let prop in obParam) {
+            if (obParam[prop] !== undefined) {
+                conditii.push(`${prop}='${obParam[prop]}'`);
+            }
+        }
+
+        AccesBD.getInstanta(Utilizator.tipConexiune).select({
+            tabel: Utilizator.tabel,
+            campuri: ["*"],
+            conditiiAnd: conditii
+        }, (err, rez) => {
+            if (err) callback(err, []);
+            else {
+                const listaUtiliz = rez.rows.map(row => new Utilizator(row));
+                callback(null, listaUtiliz);
+            }
+        });
+    }
+
+    static async cautaAsync(obParam) {
+        const conditii = [];
+        for (let prop in obParam) {
+            if (obParam[prop] !== undefined) {
+                conditii.push(`${prop}='${obParam[prop]}'`);
+            }
+        }
+
+        try {
+            const rez = await AccesBD.getInstanta(Utilizator.tipConexiune).selectAsync({
+                tabel: Utilizator.tabel,
+                campuri: ["*"],
+                conditiiAnd: conditii
+            });
+            return rez.rows.map(row => new Utilizator(row));
+        } catch (e) {
+            console.error("Eroare cautaAsync:", e);
+            return [];
+        }
+    }    
 }
 module.exports={Utilizator:Utilizator}
