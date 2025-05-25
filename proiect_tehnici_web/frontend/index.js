@@ -63,7 +63,9 @@ app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 app.use((req, res, next) => {
     // verificăm dacă cookie-ul acceptat_banner există
     const acceptat = req.cookies.acceptat_banner == "true";
-    if(acceptat){
+
+    const esteRutaHTML = !req.originalUrl.startsWith("/resurse") && !req.originalUrl.startsWith("/node_modules") && !req.originalUrl.startsWith("/.")
+    if(acceptat && esteRutaHTML) {
         res.cookie("ultima_pagina", req.originalUrl, {
             maxAge: 30000, // 30 secunde
             httpOnly: false // permite accesul din JavaScript dacă vrei
