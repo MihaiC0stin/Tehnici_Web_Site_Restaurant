@@ -118,7 +118,19 @@ class AccesBD{ // proprietatile statice tin de clasa
     }
 
 
-    
+    /**
+     * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
+     * @property {string} tabel - numele tabelului
+     * @property {string []} campuri - o lista de stringuri cu numele coloanelor afectate de query; poate cuprinde si elementul "*"
+     * @property {string[]} conditiiAnd - lista de stringuri cu conditii pentru where
+     */
+
+    /**
+     * Selectează asincron înregistrări din baza de date.
+     * @param {ObiectQuerySelect} obj - Obiect cu informațiile pentru query.
+     * @returns {Promise<Object|null>} - Promisiune care conține rezultatul queryului sau `null` dacă a eșuat.
+     */
+
     async selectAsync({tabel="",campuri=[],conditiiAnd=[]} = {}){
         let conditieWhere="";
         if(conditiiAnd.length>0)
@@ -185,6 +197,29 @@ class AccesBD{ // proprietatile statice tin de clasa
         this.client.query(comanda,callback)
     }
 
+    /**
+     * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
+     * @property {string} obj.tabel - Numele tabelului.
+     * @property {string[]} obj.campuri - Lista de nume de coloane care vor fi actualizate.
+     * @property {any[]} obj.valori - Lista de valori corespunzătoare coloanelor specificate în `campuri`.
+     * @property {string[]} obj.conditiiAnd - Lista de condiții pentru clauza WHERE.
+     */
+
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+
+    /**
+     * Actualizează înregistrări în baza de date cu parametri specificați.
+     * @param {ObiectQuerySelect} obj - Obiect cu informațiile pentru query.
+     * @param {QueryCallBack} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
+
+
+
     updateParametrizat({tabel="",campuri=[],valori=[], conditiiAnd=[]} = {}, callback, parametriQuery){
         if(campuri.length!=valori.length)
             throw new Error("Numarul de campuri difera de nr de valori")
@@ -199,18 +234,24 @@ class AccesBD{ // proprietatile statice tin de clasa
         this.client.query(comanda,valori, callback)
     }
 
+    /**
+     * @typedef {object} ObiectQuerySelect - obiect primit de functiile care realizeaza un query
+     * @property {string} obj.tabel - Numele tabelului.
+     * @property {string[]} obj.conditiiAnd - Lista de condiții pentru clauza WHERE.
+     */
 
-    //TO DO
-    // updateParametrizat({tabel="",campuri={}, conditiiAnd=[]} = {}, callback, parametriQuery){
-    //     let campuriActualizate=[];
-    //     for(let prop in campuri)
-    //         campuriActualizate.push(`${prop}='${campuri[prop]}'`);
-    //     let conditieWhere="";
-    //     if(conditiiAnd.length>0)
-    //         conditieWhere=`where ${conditiiAnd.join(" and ")}`;
-    //     let comanda=`update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
-    //     this.client.query(comanda,valori, callback)
-    // }
+    /**
+     * callback pentru queryuri.
+     * @callback QueryCallBack
+     * @param {Error} err Eventuala eroare in urma queryului
+     * @param {Object} rez Rezultatul query-ului
+     */
+
+    /**
+     * Actualizează înregistrări în baza de date cu parametri specificați.
+     * @param {ObiectQuerySelect} obj - Obiect cu informațiile pentru query.
+     * @param {QueryCallBack} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     */
 
     delete({tabel="",conditiiAnd=[]} = {}, callback){
         let conditieWhere="";
@@ -222,6 +263,12 @@ class AccesBD{ // proprietatile statice tin de clasa
         this.client.query(comanda,callback)
     }
 
+    /**
+     * Execută o comandă SQL direct în baza de date.
+     * @param {string} comanda - Comanda SQL de executat.
+     * @param {QueryCallBack} callback - Funcție callback cu 2 parametri: eroare și rezultat al query-ului.
+     */
+    
     query(comanda, callback){
         this.client.query(comanda,callback);
     }

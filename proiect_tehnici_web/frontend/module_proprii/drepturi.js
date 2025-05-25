@@ -1,7 +1,5 @@
-
 /**
- @typedef Drepturi
- @type {Object}
+ @typedef {object} Drepturi
  @property {Symbol} vizualizareUtilizatori Dreptul de a intra pe  pagina cu tabelul de utilizatori.
  @property {Symbol} stergereUtilizatori Dreptul de a sterge un utilizator
  @property {Symbol} cumparareProduse Dreptul de a cumpara
@@ -15,6 +13,9 @@
 
 
 /**
+ * Obiect care contine drepturile aplicabile utilizatorilor.
+ * Se exporta ca module.exports.Drepturi.
+ * 
  * @name module.exports.Drepturi
  * @type Drepturi
  */
