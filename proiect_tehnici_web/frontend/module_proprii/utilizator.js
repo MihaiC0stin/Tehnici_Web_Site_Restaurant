@@ -204,6 +204,7 @@ class Utilizator{
                 campuri:['*'],
                 conditiiAnd:[`username='${username}'`]}
         , function (err, rezSelect){
+            let u = null;
             if(err){
                 console.error("Utilizator:", err);
                 //throw new Error()
@@ -211,9 +212,10 @@ class Utilizator{
             }
             else if(rezSelect.rowCount==0){
                 eroare=-1;
-            }
+            } else {
             //constructor({id, username, nume, prenume, email, rol, culoare_chat="black", poza}={})
-            let u= new Utilizator(rezSelect.rows[0])
+                u = new Utilizator(rezSelect.rows[0])
+            }
             proceseazaUtiliz(u, obparam, eroare);
         });
     }
