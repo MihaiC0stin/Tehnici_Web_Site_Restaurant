@@ -280,7 +280,7 @@ class Utilizator{
         const conditii = [];
         for (let prop in obParam) {
             if (obParam[prop] !== undefined) {
-                conditii.push(`${prop}='${obParam[prop]}'`);
+                conditii.push(`${prop}='${obParam[prop]}'`); //nume='ionel'
             }
         }
 

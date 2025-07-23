@@ -12,7 +12,7 @@ const session=require('express-session');
 const Drepturi = require("./module_proprii/drepturi.js");
 const AccesBD = require('./module_proprii/accesbd.js');
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); // parseaza cookie-urile din request-uri
 
 // AccesBD.getInstanta().select({tabel:"produse", campuri: ["*"]}, function(err, rez){
 //     if (err){
@@ -62,13 +62,13 @@ app.use("/node_modules", express.static(path.join(__dirname, "node_modules")));
 
 app.use((req, res, next) => {
     // verificăm dacă cookie-ul acceptat_banner există
-    const acceptat = req.cookies.acceptat_banner == "true";
+    const acceptat = req.cookies.acceptat_banner == "true"; // daca nu exista, va fi undefined, deci fals
 
     const esteRutaHTML = !req.originalUrl.startsWith("/resurse") && !req.originalUrl.startsWith("/node_modules") && !req.originalUrl.startsWith("/.")
     if(acceptat && esteRutaHTML) {
         res.cookie("ultima_pagina", req.originalUrl, {
-            maxAge: 30000, // 30 secunde
-            httpOnly: false // permite accesul din JavaScript dacă vrei
+            maxAge: 90000, // 30 secunde
+            httpOnly: false // permite accesul din Javascript, adica din consola browserului cu document.cookie sau in fisierele mele js
         });
     }
     next();

@@ -8,14 +8,14 @@ const {Client, Pool}=require("pg"); //pg este un client pentru baza de date Post
 
 // AccesBD este o clasa care implementeaza un model de design Singleton pentru a avea o singura instanta a conexiunii la baza de date
 class AccesBD{ // proprietatile statice tin de clasa 
-    static #instanta=null;
-    static #initializat=false;
+    static #instanta=null; // instanta unica a clasei AccesBD (obiectul ei), static si privat pentru a preveni accesul direct la ea
+    static #initializat=false; // flag pentru a verifica daca instanta a fost initializata, static si privat pentru a preveni accesul direct la ea
 
     constructor() { // constructorul este privat pentru a preveni instantierea directa a clasei, creaza un obiect de tip Client pentru a se conecta la baza de date
-        if(AccesBD.#instanta){ // daca exista deja o instanta, aruncam eroare, exemplu de apelare a proprietatii statice
+        if(AccesBD.#instanta){ // fiindca clasa este Singleton, daca exista deja o instanta, aruncam o eroare
             throw new Error("Deja a fost instantiat");
         }
-        else if(!AccesBD.#initializat){
+        else if(!AccesBD.#initializat){ 
             throw new Error("Trebuie apelat doar din getInstanta; fara sa fi aruncat vreo eroare");
         }
     }
@@ -114,7 +114,7 @@ class AccesBD{ // proprietatile statice tin de clasa
         this.client.query(comanda,[val1, val2],callback)
 
         */
-        this.client.query(comanda,parametriQuery, callback)
+        this.client.query(comanda, parametriQuery, callback)
     }
 
 

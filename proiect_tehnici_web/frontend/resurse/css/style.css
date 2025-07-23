@@ -737,7 +737,7 @@ text-shadow: 2px 2px 4px black;
     100% {
         opacity: 0.75;
         transform: scale(1);
-        background-color: #555; /* sau altă culoare finală */
+        background-color: #555; 
     }
 }
 

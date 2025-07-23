@@ -42,7 +42,7 @@ class RolAdmin extends Rol{
     
     static get tip() {return "admin"}
     constructor (){
-        super();
+        super(); // apelam constructorul clasei de baza Rol
     }
 
     areDreptul(){
@@ -99,7 +99,7 @@ class AdministratorProduse extends Rol{
 /**
  * Fabrică de roluri - creează instanțe de roluri în funcție de tipul dat.
  */
-class RolFactory{
+class RolFactory{ // clasa de tip factory
     /**
      * Creează un rol pe baza tipului.
      * @param {string} tip - Tipul rolului ("admin", "moderator", etc.)
